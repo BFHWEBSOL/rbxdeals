@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import { db } from "@/lib/firebase";
 import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
 import { useSession } from "../context/SessionContext";
-import FAQAccordion from "../components/FAQAccordion";
 
 const CLOUD_FUNCTION_URL = "https://us-central1-speed-camera-50eee.cloudfunctions.net/getRobloxUser";
 
@@ -90,14 +89,12 @@ export default function RBXDealsLanding() {
     displayName: string;
     avatarUrl: string;
   }>(null);
-  const [confirmLoading, setConfirmLoading] = useState(false);
   const { user, setUser } = useSession();
   const router = useRouter();
   const [showConfirm, setShowConfirm] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  async function handleUsernameSubmit(e: React.FormEvent) {
-    e.preventDefault();
+  const handleFetchRobloxUser = async (username: string) => {
     setError("");
     if (!username.trim()) {
       setError("Please enter your Roblox username.");
@@ -108,31 +105,7 @@ export default function RBXDealsLanding() {
       const res = await fetch(`${CLOUD_FUNCTION_URL}?username=${encodeURIComponent(username.trim())}`);
       const data = await res.json();
       if (data.error) throw new Error(data.error);
-      const userRef = doc(db, "users", String(data.userId));
-      const userSnap = await getDoc(userRef);
-      if (userSnap.exists()) {
-        const userDoc = userSnap.data();
-        setUser({
-          userId: String(userDoc.userId),
-          username: userDoc.username,
-          avatarUrl: userDoc.avatarUrl,
-          robuxBalance: userDoc.robuxBalance,
-          redemptions: userDoc.redemptions || [],
-          createdAt: userDoc.createdAt,
-        });
-        router.push("/dashboard");
-      } else {
-        // Show confirmation (for now, just go to dashboard)
-        setUser({
-          userId: String(data.userId),
-          username: data.username,
-          avatarUrl: data.avatarUrl,
-          robuxBalance: 0,
-          redemptions: [],
-          createdAt: null,
-        });
-        router.push("/dashboard");
-      }
+      setRobloxUser(data);
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message || "Failed to fetch user. Try again.");
@@ -142,101 +115,40 @@ export default function RBXDealsLanding() {
     } finally {
       setLoading(false);
     }
-  }
+  };
 
-  async function handleFetchRobloxUser(e: React.FormEvent) {
-    e.preventDefault();
-    setError("");
-    setRobloxUser(null);
-    if (!username.trim()) {
-      setError("Please enter a Roblox username.");
-      return;
-    }
+  const handleConfirm = async () => {
+    if (!robloxUser) return;
     setLoading(true);
     try {
-      // 1. Fetch Roblox user info
-      const res = await fetch(`${CLOUD_FUNCTION_URL}?username=${encodeURIComponent(username.trim())}`);
-      const data = await res.json();
-      if (data.error) throw new Error(data.error);
-
-      // 2. Check Firestore for existing user
-      const userRef = doc(db, "users", String(data.userId));
-      const userSnap = await getDoc(userRef);
-
-      if (userSnap.exists()) {
-        // User exists: load, set session, go to dashboard
-        const userDoc = userSnap.data();
-        setUser({
-          userId: String(userDoc.userId),
-          username: userDoc.username,
-          avatarUrl: userDoc.avatarUrl,
-          robuxBalance: userDoc.robuxBalance,
-          redemptions: userDoc.redemptions || [],
-          createdAt: userDoc.createdAt,
-        });
-        router.push("/dashboard");
-      } else {
-        // User does not exist: show confirmation screen
-        setRobloxUser(data);
-      }
+      const userRef = doc(db, "users", String(robloxUser.userId));
+      await setDoc(userRef, {
+        userId: String(robloxUser.userId),
+        username: robloxUser.username,
+        avatarUrl: robloxUser.avatarUrl,
+        robuxBalance: 0,
+        redemptions: [],
+        createdAt: serverTimestamp(),
+      });
+      setUser({
+        userId: String(robloxUser.userId),
+        username: robloxUser.username,
+        avatarUrl: robloxUser.avatarUrl,
+        robuxBalance: 0,
+        redemptions: [],
+        createdAt: null,
+      });
+      router.push("/dashboard");
     } catch (err: unknown) {
       if (err instanceof Error) {
-        setError(err.message || "Failed to fetch user. Try again.");
+        setError(err.message || "Failed to create user. Try again.");
       } else {
-        setError("Failed to fetch user. Try again.");
+        setError("Failed to create user. Try again.");
       }
     } finally {
       setLoading(false);
     }
-  }
-
-  async function handleConfirm() {
-    if (!robloxUser) return;
-    setConfirmLoading(true);
-    setError("");
-    try {
-      const { userId, username: robloxUsername, avatarUrl } = robloxUser;
-      const userRef = doc(db, "users", String(userId));
-      console.log("Checking Firestore for user at:", userRef.path);
-      const userSnap = await getDoc(userRef);
-      let userDoc;
-      if (userSnap.exists()) {
-        userDoc = userSnap.data();
-        console.log("User already exists:", userDoc);
-      } else {
-        userDoc = {
-          userId: String(userId),
-          username: robloxUsername,
-          avatarUrl,
-          robuxBalance: 0,
-          redemptions: [],
-          createdAt: serverTimestamp(),
-        };
-        console.log("Creating user in Firestore:", userDoc);
-        try {
-          await setDoc(userRef, userDoc);
-          console.log("User created in Firestore at:", userRef.path);
-        } catch (writeErr) {
-          console.error("Error writing user to Firestore:", writeErr);
-          throw writeErr;
-        }
-      }
-      setUser({
-        userId: String(userDoc.userId),
-        username: userDoc.username,
-        avatarUrl: userDoc.avatarUrl,
-        robuxBalance: userDoc.robuxBalance,
-        redemptions: userDoc.redemptions || [],
-        createdAt: userDoc.createdAt,
-      });
-      router.push("/dashboard");
-    } catch (err: any) {
-      setError(err.message || "Login failed. Try again.");
-      console.error("Firestore error:", err);
-    } finally {
-      setConfirmLoading(false);
-    }
-  }
+  };
 
   return (
     <div className={`min-h-screen w-full font-sans ${theme === "dark" ? "bg-main-bg-dark text-primary-text-dark" : "bg-main-bg-light text-primary-text-light"}`}>
@@ -258,8 +170,6 @@ export default function RBXDealsLanding() {
             {/* Language Selector */}
             <div className="h-14 flex items-center">
               <select
-                value={lang}
-                onChange={e => setLang(e.target.value)}
                 className={`h-14 min-w-[120px] rounded-xl px-4 py-2 bg-transparent border text-base font-medium appearance-none focus:outline-none transition-all duration-150 ${theme === "dark" ? "border-border-dark text-primary-text-dark" : "border-border-light text-primary-text-light"}`}
                 style={{ boxSizing: 'border-box' }}
               >

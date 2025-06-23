@@ -1,7 +1,7 @@
 "use client";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { db } from "@/lib/firebase";
+import { db } from "../lib/firebase";
 import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
 import { useSession } from "../context/SessionContext";
 
@@ -15,59 +15,52 @@ export default function Login() {
   const { setUser } = useSession();
   const router = useRouter();
 
-  async function handleLogin(e: React.FormEvent) {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+    if (!username.trim()) {
+      setError("Please enter your Roblox username.");
+      return;
+    }
     setLoading(true);
     try {
-      // 1. Get Roblox user data from Cloud Function
-      const res = await fetch(`${CLOUD_FUNCTION_URL}?username=${encodeURIComponent(username)}`);
+      const res = await fetch(`${CLOUD_FUNCTION_URL}?username=${encodeURIComponent(username.trim())}`);
       const data = await res.json();
       if (data.error) throw new Error(data.error);
-      const userId = data.userId;
-      const avatarUrl = data.avatarUrl;
-      const robloxUsername = data.username;
-      // 2. Check Firestore for user
-      const userRef = doc(db, "users", userId);
+      const userRef = doc(db, "users", String(data.userId));
       const userSnap = await getDoc(userRef);
-      let userDoc: import("../context/SessionContext").UserSession;
       if (userSnap.exists()) {
-        const d = userSnap.data();
-        userDoc = {
-          userId: typeof d.userId === "string" ? d.userId : "",
-          username: typeof d.username === "string" ? d.username : "",
-          avatarUrl: typeof d.avatarUrl === "string" ? d.avatarUrl : "",
-          robuxBalance: typeof d.robuxBalance === "number" ? d.robuxBalance : 0,
-          tasksCompleted: typeof d.tasksCompleted === "number" ? d.tasksCompleted : 0,
-        };
+        const userDoc = userSnap.data();
+        setUser({
+          userId: String(userDoc.userId),
+          username: userDoc.username,
+          avatarUrl: userDoc.avatarUrl,
+          robuxBalance: userDoc.robuxBalance,
+          redemptions: userDoc.redemptions || [],
+          createdAt: userDoc.createdAt,
+        });
+        router.push("/dashboard");
       } else {
-        userDoc = {
-          userId,
-          username: robloxUsername,
-          avatarUrl,
-          createdAt: serverTimestamp(), // not in UserSession, but ok for Firestore
+        setUser({
+          userId: String(data.userId),
+          username: data.username,
+          avatarUrl: data.avatarUrl,
           robuxBalance: 0,
-          tasksCompleted: 0,
-        } as any;
-        await setDoc(userRef, userDoc);
+          redemptions: [],
+          createdAt: null,
+        });
+        router.push("/dashboard");
       }
-      // 3. Set session and navigate
-      setUser(userDoc);
-      try {
-        if (typeof "/dashboard" === "string") {
-          router.push("/dashboard");
-        } else {
-          router.push("/");
-        }
-      } catch (navErr) {
-        console.error("Navigation error:", navErr);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message || "Failed to fetch user. Try again.");
+      } else {
+        setError("Failed to fetch user. Try again.");
       }
-    } catch (err: any) {
-      setError(err.message || "Login failed. Try again.");
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">

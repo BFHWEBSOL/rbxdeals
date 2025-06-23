@@ -173,7 +173,7 @@ export default function Dashboard() {
                   <div className="text-gray-400 text-sm mb-1">Select game</div>
                   <div className={`flex items-center ${theme === 'dark' ? 'bg-[#282a36]' : 'bg-[#f3f4f6]'} rounded-xl px-4 py-3 mb-2 border ${theme === 'dark' ? 'border-[#343541]' : 'border-[#e5e7eb]'}`}>
                     <img src="/robux-coins.png" alt="Game" className="w-10 h-10 rounded-lg mr-4" />
-                    <span className="text-lg text-white font-medium">salakkaaz's Place</span>
+                    <span className="text-lg text-white font-medium">salakkaaz&apos;s Place</span>
                     <button className="ml-auto text-green-400 hover:underline text-sm font-semibold" onClick={() => {}}>Create new game</button>
                   </div>
                 </div>
@@ -185,7 +185,7 @@ export default function Dashboard() {
                 <div className="flex flex-col gap-2 mt-4">
                   <div className={`flex items-center gap-2 ${theme === 'dark' ? 'bg-[#232b36] border-[#2e3742] text-blue-200' : 'bg-blue-50 border-blue-200 text-blue-800'} border rounded-lg px-4 py-3 text-sm`}>
                     <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="#10a37f" strokeWidth="2"/><rect x="8" y="8" width="8" height="8" rx="2" fill="#10a37f"/></svg>
-                    We pay the roblox creator tax (30%) for you! That's why we will expect to find a pass with the value as price in the selected server.
+                    We pay the roblox creator tax (30%) for you! That&apos;s why we will expect to find a pass with the value as price in the selected server.
                   </div>
                   <div className={`flex items-center gap-2 ${theme === 'dark' ? 'bg-[#2e2620] border-[#bfa76a] text-yellow-200' : 'bg-yellow-50 border-yellow-200 text-yellow-800'} border rounded-lg px-4 py-3 text-sm`}>
                     <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="#fbbf24" strokeWidth="2"/><rect x="8" y="8" width="8" height="8" rx="2" fill="#fbbf24"/></svg>

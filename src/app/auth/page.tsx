@@ -123,7 +123,7 @@ export default function AuthPage() {
           {referrerId && (
             <div className="mt-2 p-2 bg-green-50 border border-green-200 rounded-lg">
               <p className="text-sm text-green-700">
-                🎉 You're signing up with a referral! You and your referrer will get bonus rewards.
+                🎉 You&apos;re signing up with a referral! You and your referrer will get bonus rewards.
               </p>
             </div>
           )}

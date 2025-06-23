@@ -8,8 +8,8 @@ export type UserSession = {
   username: string;
   avatarUrl: string;
   robuxBalance: number;
-  redemptions: any[];
-  createdAt?: any;
+  redemptions: unknown[];
+  createdAt?: unknown;
 };
 
 const SessionContext = createContext<{
@@ -62,4 +62,12 @@ export function useSession() {
   return useContext(SessionContext);
 }
 
-const CLOUD_FUNCTION_URL = "https://us-central1-speed-camera-50eee.cloudfunctions.net/getRobloxUser"; 
+const CLOUD_FUNCTION_URL = "https://us-central1-speed-camera-50eee.cloudfunctions.net/getRobloxUser";
+
+const login = async (username: string) => {
+  try {
+    // Implementation would go here
+  } catch (error) {
+    console.error("Login error:", error);
+  }
+}; 
