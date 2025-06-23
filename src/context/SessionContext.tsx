@@ -32,7 +32,9 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
     if (stored) {
       try {
         setUserState(JSON.parse(stored));
-      } catch {}
+      } catch {
+        // Ignore parsing errors
+      }
     }
     setMounted(true);
   }, []);
@@ -60,14 +62,4 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
 
 export function useSession() {
   return useContext(SessionContext);
-}
-
-const CLOUD_FUNCTION_URL = "https://us-central1-speed-camera-50eee.cloudfunctions.net/getRobloxUser";
-
-const login = async (username: string) => {
-  try {
-    // Implementation would go here
-  } catch (error) {
-    console.error("Login error:", error);
-  }
-}; 
+} 

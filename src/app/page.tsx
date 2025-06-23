@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { db } from "@/lib/firebase";
-import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { useSession } from "../context/SessionContext";
 
 const CLOUD_FUNCTION_URL = "https://us-central1-speed-camera-50eee.cloudfunctions.net/getRobloxUser";
@@ -93,62 +93,6 @@ export default function RBXDealsLanding() {
   const router = useRouter();
   const [showConfirm, setShowConfirm] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
-  const handleFetchRobloxUser = async (username: string) => {
-    setError("");
-    if (!username.trim()) {
-      setError("Please enter your Roblox username.");
-      return;
-    }
-    setLoading(true);
-    try {
-      const res = await fetch(`${CLOUD_FUNCTION_URL}?username=${encodeURIComponent(username.trim())}`);
-      const data = await res.json();
-      if (data.error) throw new Error(data.error);
-      setRobloxUser(data);
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        setError(err.message || "Failed to fetch user. Try again.");
-      } else {
-        setError("Failed to fetch user. Try again.");
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleConfirm = async () => {
-    if (!robloxUser) return;
-    setLoading(true);
-    try {
-      const userRef = doc(db, "users", String(robloxUser.userId));
-      await setDoc(userRef, {
-        userId: String(robloxUser.userId),
-        username: robloxUser.username,
-        avatarUrl: robloxUser.avatarUrl,
-        robuxBalance: 0,
-        redemptions: [],
-        createdAt: serverTimestamp(),
-      });
-      setUser({
-        userId: String(robloxUser.userId),
-        username: robloxUser.username,
-        avatarUrl: robloxUser.avatarUrl,
-        robuxBalance: 0,
-        redemptions: [],
-        createdAt: null,
-      });
-      router.push("/dashboard");
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        setError(err.message || "Failed to create user. Try again.");
-      } else {
-        setError("Failed to create user. Try again.");
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <div className={`min-h-screen w-full font-sans ${theme === "dark" ? "bg-main-bg-dark text-primary-text-dark" : "bg-main-bg-light text-primary-text-light"}`}>

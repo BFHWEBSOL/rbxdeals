@@ -189,7 +189,7 @@ export default function Dashboard() {
                   </div>
                   <div className={`flex items-center gap-2 ${theme === 'dark' ? 'bg-[#2e2620] border-[#bfa76a] text-yellow-200' : 'bg-yellow-50 border-yellow-200 text-yellow-800'} border rounded-lg px-4 py-3 text-sm`}>
                     <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="#fbbf24" strokeWidth="2"/><rect x="8" y="8" width="8" height="8" rx="2" fill="#fbbf24"/></svg>
-                    Make sure to turn off "Regional Price" when creating a gamepass for withdrawing!
+                    Make sure to turn off &quot;Regional Price&quot; when creating a gamepass for withdrawing!
                   </div>
                 </div>
                 <button className={`mt-8 w-full rounded-xl font-bold text-lg py-4 transition ${theme === 'dark' ? 'bg-[#10a37f] hover:bg-green-700 text-white' : 'bg-[#10a37f] hover:bg-green-700 text-white'}`}>Redeem</button>
