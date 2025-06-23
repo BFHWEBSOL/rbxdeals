@@ -1,9 +1,13 @@
-"use client";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import React from "react";
+import Login from "../../components/Login";
+import { useTheme } from "next-themes";
 
-export default function RedirectToAuth() {
-  const router = useRouter();
-  useEffect(() => { router.replace("/auth"); }, [router]);
-  return null;
+export default function LoginPage() {
+  const { theme } = useTheme();
+
+  return (
+    <div className={`min-h-screen flex items-center justify-center ${theme === 'dark' ? 'bg-main-bg-dark text-primary-text-dark' : 'bg-main-bg-light text-primary-text-light'}`}>
+      <Login />
+    </div>
+  );
 } 

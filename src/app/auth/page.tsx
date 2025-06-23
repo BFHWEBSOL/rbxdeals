@@ -28,6 +28,7 @@ export default function AuthPage() {
   const [error, setError] = useState('');
   const [referrerId, setReferrerId] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
+  const [theme, setTheme] = useState('light');
 
   useEffect(() => {
     setMounted(true);
@@ -114,11 +115,11 @@ export default function AuthPage() {
   if (!mounted) return null;
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center p-4">
+    <div className={`min-h-screen flex items-center justify-center p-4 ${theme === 'dark' ? 'bg-main-bg-dark' : 'bg-main-bg-light'}`}>
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-black mb-2">{isLogin ? 'Sign In' : 'Sign Up'}</h1>
-          <p className="text-gray-600">{isLogin ? 'Welcome back!' : 'Create your account'}</p>
+          <h1 className={`text-3xl font-bold mb-2 ${theme === 'dark' ? 'text-primary-text-dark' : 'text-primary-text-light'}`}>{isLogin ? 'Sign In' : 'Sign Up'}</h1>
+          <p className={`${theme === 'dark' ? 'text-muted-text-dark' : 'text-muted-text-light'}`}>{isLogin ? 'Welcome back!' : 'Create your account'}</p>
           {!isLogin && referrerId && (
             <div className="mt-2 p-2 bg-green-50 border border-green-200 rounded-lg">
               <p className="text-sm text-green-700">
@@ -128,50 +129,46 @@ export default function AuthPage() {
           )}
         </div>
 
-        <div className="bg-[#F2F2F2] rounded-lg p-6 mb-4">
+        <div className={`rounded-lg p-6 mb-4 ${theme === 'dark' ? 'bg-card-bg-dark' : 'bg-card-bg-light'}`}>
           {error && (
             <p className="text-red-600 text-sm mb-2 text-center font-medium">{error}</p>
           )}
-          <form className="space-y-4" onSubmit={handleAuth}>
+          <form onSubmit={handleAuth} className="space-y-4">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-black mb-1">
-                Email
-              </label>
+              <label htmlFor="email" className={`block text-sm font-medium mb-1 ${theme === 'dark' ? 'text-primary-text-dark' : 'text-primary-text-light'}`}>Email</label>
               <input
                 id="email"
                 type="email"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E2231A] focus:border-transparent bg-white text-black"
+                className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 ${theme === 'dark' ? 'border-border-dark bg-main-bg-dark text-primary-text-dark focus:ring-accent' : 'border-border-light bg-card-bg-light text-primary-text-light focus:ring-accent'}`}
                 placeholder="Enter your email"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 required
+                disabled={loading}
               />
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-black mb-1">
-                Password
-              </label>
+              <label htmlFor="password" className={`block text-sm font-medium mb-1 ${theme === 'dark' ? 'text-primary-text-dark' : 'text-primary-text-light'}`}>Password</label>
               <input
                 id="password"
                 type="password"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E2231A] focus:border-transparent bg-white text-black"
+                className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 ${theme === 'dark' ? 'border-border-dark bg-main-bg-dark text-primary-text-dark focus:ring-accent' : 'border-border-light bg-card-bg-light text-primary-text-light focus:ring-accent'}`}
                 placeholder="Enter your password"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
                 required
+                disabled={loading}
               />
             </div>
 
             {!isLogin && (
               <div>
-                <label htmlFor="confirmPassword" className="block text-sm font-medium text-black mb-1">
-                  Confirm Password
-                </label>
+                <label htmlFor="confirmPassword" className={`block text-sm font-medium mb-1 ${theme === 'dark' ? 'text-primary-text-dark' : 'text-primary-text-light'}`}>Confirm Password</label>
                 <input
                   id="confirmPassword"
                   type="password"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E2231A] focus:border-transparent bg-white text-black"
+                  className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 ${theme === 'dark' ? 'border-border-dark bg-main-bg-dark text-primary-text-dark focus:ring-accent' : 'border-border-light bg-card-bg-light text-primary-text-light focus:ring-accent'}`}
                   placeholder="Confirm your password"
                   value={confirmPassword}
                   onChange={e => setConfirmPassword(e.target.value)}
@@ -183,7 +180,7 @@ export default function AuthPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-black text-white py-2 px-4 rounded-lg font-medium hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 transition-colors"
+              className={`w-full py-2 px-4 rounded-lg font-medium transition-colors ${theme === 'dark' ? 'bg-accent text-white hover:bg-accent/90 focus:ring-accent' : 'bg-accent text-white hover:bg-accent/90 focus:ring-accent'}`}
             >
               {loading ? 'Please wait...' : isLogin ? 'Sign In' : 'Sign Up'}
             </button>
@@ -192,32 +189,30 @@ export default function AuthPage() {
 
         <div className="relative mb-4">
           <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-gray-300"></div>
+            <div className={`w-full border-t ${theme === 'dark' ? 'border-border-dark' : 'border-border-light'}`}></div>
           </div>
           <div className="relative flex justify-center text-sm">
-            <span className="px-2 bg-white text-gray-500">or</span>
+            <span className={`px-2 ${theme === 'dark' ? 'bg-card-bg-dark text-muted-text-dark' : 'bg-card-bg-light text-muted-text-light'}`}>or</span>
           </div>
         </div>
 
         <button
           onClick={handleGoogle}
           disabled={loading}
-          className="w-full bg-white border border-gray-300 text-black py-2 px-4 rounded-lg font-medium hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#E2231A] focus:ring-offset-2 transition-colors flex items-center justify-center gap-2 mb-6"
+          className={`w-full border py-2 px-4 rounded-lg font-medium flex items-center justify-center gap-2 mb-6 transition-colors ${theme === 'dark' ? 'bg-main-bg-dark border-border-dark text-primary-text-dark hover:bg-hover-dark' : 'bg-card-bg-light border-border-light text-primary-text-light hover:bg-hover-light'}`}
         >
           <FcGoogle className="w-5 h-5" />
           Continue with Google
         </button>
 
         <div className="text-center">
-          <p className="text-gray-600">
-            {isLogin ? "Don't have an account?" : "Already have an account?"}
-            <button
-              onClick={() => setIsLogin(!isLogin)}
-              className="ml-1 text-[#E2231A] hover:underline font-medium"
-            >
-              {isLogin ? 'Sign Up' : 'Sign In'}
-            </button>
-          </p>
+          <button
+            className={`text-accent font-semibold hover:underline transition`}
+            onClick={() => setIsLogin(!isLogin)}
+            disabled={loading}
+          >
+            {isLogin ? "Don't have an account? Sign Up" : "Already have an account? Sign In"}
+          </button>
         </div>
 
         <div className="mt-8 text-center">
