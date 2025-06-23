@@ -1,3 +1,29 @@
+# RBXDeals - Roblox Rewards Platform
+
+A modern, fully responsive Roblox rewards web app that allows users to earn Robux by completing tasks.
+
+## Features
+
+- Landing page with gamer-inspired UI
+- Sticky header with theme toggle
+- Signup/login with Roblox usernames
+- Dynamic avatar and balance display
+- FAQ section
+- Dark and light theme support
+- Green accent color (#10a37f)
+
+## Tech Stack
+
+- React 19
+- Next.js 15
+- TypeScript
+- Tailwind CSS
+- Firebase (Functions and Firestore)
+
+## Deployment
+
+This app is deployed on Vercel and ready for production use.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
