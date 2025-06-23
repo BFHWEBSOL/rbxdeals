@@ -19,7 +19,7 @@ export default function Modal({ open, onClose, children, title }: { open: boolea
         {title && <h2 className="text-xl font-bold mb-4 text-primary-text-light dark:text-primary-text-dark">{title}</h2>}
         {children}
       </div>
-      <style jsx global>{`
+      <style jsx>{`
         @keyframes fadeInScale {
           0% { opacity: 0; transform: scale(0.95); }
           100% { opacity: 1; transform: scale(1); }

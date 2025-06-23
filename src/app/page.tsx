@@ -80,7 +80,6 @@ function useTheme(): [string, React.Dispatch<React.SetStateAction<string>>] {
 export default function RBXDealsLanding() {
   const [theme, setTheme] = useTheme();
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
-  const [lang, setLang] = useState("en");
   const [modalOpen, setModalOpen] = useState(false);
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
@@ -134,8 +133,12 @@ export default function RBXDealsLanding() {
         });
         router.push("/dashboard");
       }
-    } catch (err: any) {
-      setError(err.message || "Failed to fetch user. Try again.");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message || "Failed to fetch user. Try again.");
+      } else {
+        setError("Failed to fetch user. Try again.");
+      }
     } finally {
       setLoading(false);
     }
@@ -176,8 +179,12 @@ export default function RBXDealsLanding() {
         // User does not exist: show confirmation screen
         setRobloxUser(data);
       }
-    } catch (err: any) {
-      setError(err.message || "Failed to fetch user. Try again.");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message || "Failed to fetch user. Try again.");
+      } else {
+        setError("Failed to fetch user. Try again.");
+      }
     } finally {
       setLoading(false);
     }
@@ -507,8 +514,12 @@ export default function RBXDealsLanding() {
                     setRobloxUser(data);
                     setShowConfirm(true);
                   }
-                } catch (err: any) {
-                  setError(err.message || "Failed to fetch user. Try again.");
+                } catch (err: unknown) {
+                  if (err instanceof Error) {
+                    setError(err.message || "Failed to fetch user. Try again.");
+                  } else {
+                    setError("Failed to fetch user. Try again.");
+                  }
                 } finally {
                   setLoading(false);
                 }

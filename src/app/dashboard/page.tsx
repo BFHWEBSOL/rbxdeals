@@ -15,7 +15,6 @@ function useTheme(): [string, React.Dispatch<React.SetStateAction<string>>] {
   return [theme, setTheme];
 }
 
-const accent = "#10a37f";
 const sidebarLinks = [
   { label: "Earn Robux", icon: "💰" },
   { label: "Withdraw", icon: "⬇️" },
@@ -37,7 +36,7 @@ export default function Dashboard() {
       {/* Sidebar */}
       <aside className={`w-64 min-h-screen flex flex-col py-8 px-4 border-r ${theme === 'dark' ? 'bg-[#202123] border-[#3E3F4B]' : 'bg-[#F7F7F8] border-[#D9D9E3]'}`}>
         <div className="text-2xl font-extrabold tracking-tight mb-10 select-none">
-          <span>RBX</span><span style={{ color: accent }}>Deals</span>
+          <span>RBX</span><span style={{ color: '#10a37f' }}>Deals</span>
         </div>
         <nav className="flex flex-col gap-2">
           {sidebarLinks.map(link => (
@@ -66,7 +65,7 @@ export default function Dashboard() {
         {/* Header */}
         <header className={`flex items-center justify-between px-8 py-4 border-b ${theme === 'dark' ? 'bg-[#343541] border-[#3E3F4B]' : 'bg-[#FFFFFF] border-[#D9D9E3]'}`}>
           <div className="text-2xl font-extrabold tracking-tight select-none">
-            <span>RBX</span><span style={{ color: accent }}>Deals</span>
+            <span>RBX</span><span style={{ color: '#10a37f' }}>Deals</span>
           </div>
           <div className="flex items-center gap-4">
             <select className="h-12 min-w-[120px] rounded-xl px-4 py-2 bg-transparent border text-base font-medium appearance-none focus:outline-none border-[#343541] text-white">
@@ -203,7 +202,7 @@ export default function Dashboard() {
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:justify-between gap-8">
             <div className="flex-1 flex flex-col gap-4">
               <div className="text-2xl font-extrabold tracking-tight select-none">
-                <span>RBX</span><span style={{ color: accent }}>Deals</span>
+                <span>RBX</span><span style={{ color: '#10a37f' }}>Deals</span>
               </div>
               <div className="max-w-xs text-sm">
                 RBXDeals strives to build a fun and easy experience of getting free Robux. We do this by rewarding consistent and honest users with a lot of bonuses, promocodes and events.
