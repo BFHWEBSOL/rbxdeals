@@ -1,6 +1,5 @@
 "use client";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import React from "react";
 import { useTheme } from "next-themes";
 
 export default function SignupPage() {
