@@ -124,38 +124,47 @@ export default function RBXDealsLanding() {
             </div>
             <div className="h-14 w-px bg-border-dark mx-2 hidden md:block" />
             {/* User Avatar + Balance */}
-            <div className="flex items-center gap-3 relative h-14">
-              <div
-                className={`h-14 w-14 flex items-center justify-center rounded-xl border-2 cursor-pointer transition-all duration-150 ${dropdownOpen ? "border-accent scale-105" : theme === "dark" ? "border-accent bg-sidebar-bg-dark" : "border-accent bg-main-bg-light hover:scale-110"}`}
-                onClick={() => setDropdownOpen((open) => !open)}
-                tabIndex={0}
-                onBlur={() => setTimeout(() => setDropdownOpen(false), 150)}
-                style={{ boxSizing: 'border-box' }}
-              >
-                <img src={user?.avatarUrl || "/avatar-placeholder.png"} alt="User avatar" className="w-12 h-12 rounded-lg object-cover transition-transform duration-150" />
-              </div>
-              <div className={`h-14 flex items-center gap-1 px-6 rounded-xl border font-bold text-lg min-w-[90px] justify-center ${theme === "dark" ? "bg-sidebar-bg-dark border-border-dark text-accent" : "bg-card-bg-light border-accent text-accent"}`}
-                style={{ boxSizing: 'border-box' }}
-              >
-                <span>{typeof user?.robuxBalance === 'number' ? user.robuxBalance : '0.5'}</span>
-                <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="10" stroke="#10a37f" strokeWidth="2"/>
-                  <rect x="8" y="8" width="8" height="8" rx="2" fill="#10a37f"/>
-                  <text x="12" y="16" textAnchor="middle" fontSize="10" fill="white" fontWeight="bold">R$</text>
-                </svg>
-              </div>
-              {/* Dropdown menu */}
-              {dropdownOpen && (
-                <div className={`absolute top-14 left-0 z-50 w-48 rounded-xl shadow-lg ${theme === "dark" ? "bg-hover-dark text-primary-text-dark" : "bg-main-bg-light text-primary-text-light"} py-2 flex flex-col gap-1 animate-fade-in`}
-                  tabIndex={-1}
+            {user ? (
+              <div className="flex items-center gap-3 relative h-14">
+                <div
+                  className={`h-14 w-14 flex items-center justify-center rounded-xl border-2 cursor-pointer transition-all duration-150 ${dropdownOpen ? "border-accent scale-105" : theme === "dark" ? "border-accent bg-sidebar-bg-dark" : "border-accent bg-main-bg-light hover:scale-110"}`}
+                  onClick={() => setDropdownOpen((open) => !open)}
+                  tabIndex={0}
+                  onBlur={() => setTimeout(() => setDropdownOpen(false), 150)}
+                  style={{ boxSizing: 'border-box' }}
                 >
-                  <button className="text-left px-4 py-2 hover:bg-hover-dark rounded-lg transition" onClick={() => setDropdownOpen(false)}>Profile</button>
-                  <button className="text-left px-4 py-2 hover:bg-hover-dark rounded-lg transition" onClick={() => setDropdownOpen(false)}>Offer history</button>
-                  <button className="text-left px-4 py-2 hover:bg-hover-dark rounded-lg transition" onClick={() => setDropdownOpen(false)}>Withdraw history</button>
-                  <button className="text-left px-4 py-2 hover:bg-hover-dark rounded-lg transition text-red-400" onClick={() => { setUser(null); setDropdownOpen(false); }}>Sign out</button>
+                  <img src={user?.avatarUrl || "/avatar-placeholder.png"} alt="User avatar" className="w-12 h-12 rounded-lg object-cover transition-transform duration-150" />
                 </div>
-              )}
-            </div>
+                <div className={`h-14 flex items-center gap-1 px-6 rounded-xl border font-bold text-lg min-w-[90px] justify-center ${theme === "dark" ? "bg-sidebar-bg-dark border-border-dark text-accent" : "bg-card-bg-light border-accent text-accent"}`}
+                  style={{ boxSizing: 'border-box' }}
+                >
+                  <span>{typeof user?.robuxBalance === 'number' ? user.robuxBalance : '0.5'}</span>
+                  <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10" stroke="#10a37f" strokeWidth="2"/>
+                    <rect x="8" y="8" width="8" height="8" rx="2" fill="#10a37f"/>
+                    <text x="12" y="16" textAnchor="middle" fontSize="10" fill="white" fontWeight="bold">R$</text>
+                  </svg>
+                </div>
+                {/* Dropdown menu */}
+                {dropdownOpen && (
+                  <div className={`absolute top-14 left-0 z-50 w-48 rounded-xl shadow-lg ${theme === "dark" ? "bg-hover-dark text-primary-text-dark" : "bg-main-bg-light text-primary-text-light"} py-2 flex flex-col gap-1 animate-fade-in`}
+                    tabIndex={-1}
+                  >
+                    <button className="text-left px-4 py-2 hover:bg-hover-dark rounded-lg transition" onClick={() => setDropdownOpen(false)}>Profile</button>
+                    <button className="text-left px-4 py-2 hover:bg-hover-dark rounded-lg transition" onClick={() => setDropdownOpen(false)}>Offer history</button>
+                    <button className="text-left px-4 py-2 hover:bg-hover-dark rounded-lg transition" onClick={() => setDropdownOpen(false)}>Withdraw history</button>
+                    <button className="text-left px-4 py-2 hover:bg-hover-dark rounded-lg transition text-red-400" onClick={() => { setUser(null); setDropdownOpen(false); }}>Sign out</button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <button
+                className="bg-accent hover:bg-accent-hover text-white px-6 py-2 rounded-xl font-bold text-base shadow transition"
+                onClick={() => setModalOpen(true)}
+              >
+                Sign In
+              </button>
+            )}
             {/* Theme Toggle */}
             <button
               aria-label="Toggle theme"
