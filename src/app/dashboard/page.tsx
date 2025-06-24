@@ -172,7 +172,7 @@ export default function Dashboard() {
                 <div className="mb-2">
                   <div className="text-gray-400 text-sm mb-1">Select game</div>
                   <div className={`flex items-center ${theme === 'dark' ? 'bg-[#282a36]' : 'bg-[#f3f4f6]'} rounded-xl px-4 py-3 mb-2 border ${theme === 'dark' ? 'border-[#343541]' : 'border-[#e5e7eb]'}`}>
-                    <img src="/robux-coins.png" alt="Game" className="w-10 h-10 rounded-lg mr-4" />
+                    <img src="/images/robux-coins.png" alt="Game" className="w-10 h-10 rounded-lg mr-4" />
                     <span className="text-lg text-white font-medium">salakkaaz&apos;s Place</span>
                     <button className="ml-auto text-green-400 hover:underline text-sm font-semibold" onClick={() => {}}>Create new game</button>
                   </div>

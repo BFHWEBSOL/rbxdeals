@@ -191,7 +191,7 @@ export default function RBXDealsLanding() {
           </div>
         </div>
         <div className="flex-1 flex justify-center items-center">
-          <img src="/robux-coins.png" alt="Robux coins" className="w-72 md:w-96 rounded-xl shadow-lg" />
+          <img src="/images/robux-coins.png" alt="Robux coins" className="w-72 md:w-96 rounded-xl shadow-lg" />
         </div>
       </section>
 
