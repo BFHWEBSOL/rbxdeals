@@ -117,7 +117,7 @@ export default function Dashboard() {
         {activeTab === "Earn Robux" && (
           <main className="flex-1 p-8 flex flex-col items-center justify-center">
             <section className={`${theme === 'dark' ? 'bg-[#202123]' : 'bg-[#F7F7F8]'} rounded-2xl shadow-[0_4px_24px_0_rgba(16,163,127,0.06)] p-6 flex flex-col gap-4 border ${theme === 'dark' ? 'border-[#3E3F4B]' : 'border-[#D9D9E3]'}`} style={{ width: '100%', maxWidth: 700 }}>
-              <h2 className={`text-2xl font-bold mb-4 ${theme === 'dark' ? 'text-[#ECECF1]' : 'text-[#000000]'}`}>Offerwall</h2>
+              <h2 className={`text-2xl font-bold mb-4 ${theme === 'dark' ? 'text-[#ECECF1]' : 'text-[#000000]'}`}>Tasks</h2>
               <p className={`${theme === 'dark' ? 'text-[#8E8EA0]' : 'text-[#6E6E80]'} mb-4`}>Complete offers or watch videos to get robux!</p>
               <div className="w-full h-96 bg-card-light dark:bg-card-dark rounded-2xl shadow-card-light dark:shadow-card-dark flex items-center justify-center text-secondary-light dark:text-secondary-dark text-lg mb-4">
                 <iframe
