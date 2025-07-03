@@ -115,46 +115,18 @@ export default function Dashboard() {
         </header>
         {/* Main Sections */}
         {activeTab === "Earn Robux" && (
-          <main className="flex-1 p-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Offerwalls */}
-            <section className={`${theme === 'dark' ? 'bg-[#202123]' : 'bg-[#F7F7F8]'} rounded-2xl shadow-[0_4px_24px_0_rgba(16,163,127,0.06)] p-6 flex flex-col gap-4 border ${theme === 'dark' ? 'border-[#3E3F4B]' : 'border-[#D9D9E3]'}`}>
-              <div className="flex items-center gap-2 mb-2">
-                <h2 className={`text-2xl font-bold ${theme === 'dark' ? 'text-[#ECECF1]' : 'text-[#000000]'}`}>Offerwalls</h2>
-              </div>
-              <div className={`${theme === 'dark' ? 'text-[#8E8EA0]' : 'text-[#6E6E80]'} mb-4`}>Complete offers or watch videos to get robux!</div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className={`${theme === 'dark' ? 'bg-[#2A2B32] text-[#ECECF1] border border-[#3E3F4B]' : 'bg-[#FFFFFF] border border-[#10A37F] text-[#10A37F]'} rounded-xl flex items-center justify-center p-4 font-bold text-lg hover:bg-[#10A37F] hover:text-white transition`}>TOROX</div>
-                <div className={`${theme === 'dark' ? 'bg-[#2A2B32] text-[#ECECF1] border border-[#3E3F4B]' : 'bg-[#FFFFFF] border border-[#10A37F] text-[#10A37F]'} rounded-xl flex items-center justify-center p-4 font-bold text-lg hover:bg-[#10A37F] hover:text-white transition`}>AYE STUDIOS</div>
-                <div className={`${theme === 'dark' ? 'bg-[#2A2B32] text-[#ECECF1] border border-[#3E3F4B]' : 'bg-[#FFFFFF] border border-[#10A37F] text-[#10A37F]'} rounded-xl flex items-center justify-center p-4 font-bold text-lg hover:bg-[#10A37F] hover:text-white transition`}>Bitlabs Offers</div>
-                <div className={`${theme === 'dark' ? 'bg-[#2A2B32] text-[#ECECF1] border border-[#3E3F4B]' : 'bg-[#FFFFFF] border border-[#10A37F] text-[#10A37F]'} rounded-xl flex items-center justify-center p-4 font-bold text-lg hover:bg-[#10A37F] hover:text-white transition`}>AdGateMedia</div>
-                <div className={`${theme === 'dark' ? 'bg-[#2A2B32] text-[#ECECF1] border border-[#3E3F4B]' : 'bg-[#FFFFFF] border border-[#10A37F] text-[#10A37F]'} rounded-xl flex items-center justify-center p-4 font-bold text-lg hover:bg-[#10A37F] hover:text-white transition`}>Lootably</div>
-              </div>
-            </section>
-            {/* Surveys */}
-            <section className={`${theme === 'dark' ? 'bg-[#202123]' : 'bg-[#F7F7F8]'} rounded-2xl shadow-[0_4px_24px_0_rgba(16,163,127,0.06)] p-6 flex flex-col gap-4 border ${theme === 'dark' ? 'border-[#3E3F4B]' : 'border-[#D9D9E3]'}`}>
-              <div className="flex items-center gap-2 mb-2">
-                <h2 className={`text-2xl font-bold ${theme === 'dark' ? 'text-[#ECECF1]' : 'text-[#000000]'}`}>Surveys</h2>
-              </div>
-              <div className={`${theme === 'dark' ? 'text-[#8E8EA0]' : 'text-[#6E6E80]'} mb-4`}>Answer and complete surveys to get robux!</div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className={`${theme === 'dark' ? 'bg-[#2A2B32] text-[#ECECF1] border border-[#3E3F4B]' : 'bg-[#FFFFFF] border border-[#10A37F] text-[#10A37F]'} rounded-xl flex items-center justify-center p-4 font-bold text-lg hover:bg-[#10A37F] hover:text-white transition`}>Bitlabs</div>
-                <div className={`${theme === 'dark' ? 'bg-[#2A2B32] text-[#ECECF1] border border-[#3E3F4B]' : 'bg-[#FFFFFF] border border-[#10A37F] text-[#10A37F]'} rounded-xl flex items-center justify-center p-4 font-bold text-lg hover:bg-[#10A37F] hover:text-white transition`}>Prime Surveys</div>
-                <div className={`${theme === 'dark' ? 'bg-[#2A2B32] text-[#ECECF1] border border-[#3E3F4B]' : 'bg-[#FFFFFF] border border-[#10A37F] text-[#10A37F]'} rounded-xl flex items-center justify-center p-4 font-bold text-lg hover:bg-[#10A37F] hover:text-white transition`}>CPX RESEARCH</div>
-                <div className={`${theme === 'dark' ? 'bg-[#2A2B32] text-[#ECECF1] border border-[#3E3F4B]' : 'bg-[#FFFFFF] border border-[#10A37F] text-[#10A37F]'} rounded-xl flex items-center justify-center p-4 font-bold text-lg hover:bg-[#10A37F] hover:text-white transition`}>theoremreach</div>
-              </div>
-            </section>
-            {/* Tasks */}
-            <section className={`${theme === 'dark' ? 'bg-[#202123]' : 'bg-[#F7F7F8]'} rounded-2xl shadow-[0_4px_24px_0_rgba(16,163,127,0.06)] p-6 flex flex-col gap-4 border ${theme === 'dark' ? 'border-[#3E3F4B]' : 'border-[#D9D9E3]'}`}>
-              <div className="flex items-center gap-2 mb-2">
-                <h2 className={`text-2xl font-bold ${theme === 'dark' ? 'text-[#ECECF1]' : 'text-[#000000]'}`}>Tasks</h2>
-              </div>
-              <div className={`${theme === 'dark' ? 'text-[#8E8EA0]' : 'text-[#6E6E80]'} mb-4`}>Follow our social media accounts for some free robux!</div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className={`${theme === 'dark' ? 'bg-[#2A2B32] text-[#ECECF1] border border-[#3E3F4B]' : 'bg-[#FFFFFF] border border-[#10A37F] text-[#10A37F]'} rounded-xl flex items-center justify-center p-4 font-bold text-lg hover:bg-[#10A37F] hover:text-white transition`}>Discord</div>
-                <div className={`${theme === 'dark' ? 'bg-[#2A2B32] text-[#ECECF1] border border-[#3E3F4B]' : 'bg-[#FFFFFF] border border-[#10A37F] text-[#10A37F]'} rounded-xl flex items-center justify-center p-4 font-bold text-lg hover:bg-[#10A37F] hover:text-white transition`}>Instagram <span className="ml-2 text-xs bg-blue-900 text-blue-400 px-2 py-1 rounded-lg">NEW</span></div>
-                <div className={`${theme === 'dark' ? 'bg-[#2A2B32] text-[#ECECF1] border border-[#3E3F4B]' : 'bg-[#FFFFFF] border border-[#10A37F] text-[#10A37F]'} rounded-xl flex items-center justify-center p-4 font-bold text-lg hover:bg-[#10A37F] hover:text-white transition`}>Twitter/X</div>
-                <div className={`${theme === 'dark' ? 'bg-[#2A2B32] text-[#ECECF1] border border-[#3E3F4B]' : 'bg-[#FFFFFF] border border-[#10A37F] text-[#10A37F]'} rounded-xl flex items-center justify-center p-4 font-bold text-lg hover:bg-[#10A37F] hover:text-white transition`}>Instagram</div>
-                <div className={`${theme === 'dark' ? 'bg-[#2A2B32] text-[#ECECF1] border border-[#3E3F4B]' : 'bg-[#FFFFFF] border border-[#10A37F] text-[#10A37F]'} rounded-xl flex items-center justify-center p-4 font-bold text-lg hover:bg-[#10A37F] hover:text-white transition`}>Twitter/X</div>
+          <main className="flex-1 p-8 flex flex-col items-center justify-center">
+            <section className={`${theme === 'dark' ? 'bg-[#202123]' : 'bg-[#F7F7F8]'} rounded-2xl shadow-[0_4px_24px_0_rgba(16,163,127,0.06)] p-6 flex flex-col gap-4 border ${theme === 'dark' ? 'border-[#3E3F4B]' : 'border-[#D9D9E3]'}`} style={{ width: '100%', maxWidth: 700 }}>
+              <h2 className={`text-2xl font-bold mb-4 ${theme === 'dark' ? 'text-[#ECECF1]' : 'text-[#000000]'}`}>Offerwall</h2>
+              <p className={`${theme === 'dark' ? 'text-[#8E8EA0]' : 'text-[#6E6E80]'} mb-4`}>Complete offers or watch videos to get robux!</p>
+              <div className="w-full h-96 bg-card-light dark:bg-card-dark rounded-2xl shadow-card-light dark:shadow-card-dark flex items-center justify-center text-secondary-light dark:text-secondary-dark text-lg mb-4">
+                <iframe
+                  sandbox="allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation allow-popups-to-escape-sandbox"
+                  src={`https://cdnnd.com/list/Fh5A?subid=${user.userId}`}
+                  style={{ width: "100%", height: "100%", border: "none", borderRadius: "1rem" }}
+                  frameBorder="0"
+                  title="CPAlead Offer Wall"
+                ></iframe>
               </div>
             </section>
           </main>
