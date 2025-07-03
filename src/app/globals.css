@@ -1,33 +1,31 @@
 :root {
-  /* Primary Colors */
-  --color-primary: #FF4444;
-  --color-primary-dark: #CC0000;
-  --color-primary-light: #FF7777;
+  /* Backgrounds */
+  --bg-main: #FFFFFF;
+  --bg-card: #F8F9FA;
+  --bg-input: #F1F5F9;
+  --bg-hover: #F4F4F5;
+  --border-color: #E5E5E5;
 
-  /* Secondary Colors */
-  --color-secondary: #007AFF;
-  --color-secondary-dark: #0051B8;
-  --color-secondary-light: #66B3FF;
+  /* Buttons */
+  --btn-primary: #FF4444;
+  --btn-primary-hover: #CC0000;
+  --btn-secondary: #007AFF;
+  --btn-secondary-hover: #0051B8;
+  --btn-success: #22C55E;
+  --btn-success-hover: #15803D;
+  --btn-disabled: #E5E7EB;
 
-  /* Success Colors */
-  --color-success: #22C55E;
-  --color-success-dark: #15803D;
-  --color-success-light: #BBF7D0;
+  /* Text */
+  --text-primary: #212121;
+  --text-secondary: #555555;
+  --text-disabled: #9CA3AF;
+  --text-inverse: #FFFFFF;
+  --text-link: #007AFF;
+  --text-success: #22C55E;
+  --text-error: #DC2626;
 
-  /* Warning & Error Colors */
-  --color-warning: #F97316;
-  --color-error: #DC2626;
-
-  /* Neutrals */
-  --color-bg: #FFFFFF;
-  --color-surface: #F8F9FA;
-  --color-border: #E5E5E5;
-  --color-text-primary: #212121;
-  --color-text-secondary: #555555;
-  --color-text-disabled: #9CA3AF;
-
-  /* Special - Robux Theme Color */
-  --color-robux: #1CBB4F;
+  /* Robux */
+  --robux-green: #1CBB4F;
 }
 
 @tailwind base;
