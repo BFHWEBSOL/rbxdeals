@@ -3,7 +3,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-export default function Navbar({ user = { username: "Player123", balance: 120 }, onLogout }: { user?: { username: string, balance: number }, onLogout?: () => void }) {
+export default function Navbar({ user = { username: "Player123", balance: 120 } }: { user?: { username: string, balance: number } }) {
   return (
     <nav className="w-full flex items-center justify-between px-4 md:px-8 py-2 bg-[#f5f5f5] border-b border-[#e3e3e3] fixed top-0 left-0 z-30 h-14">
       {/* Left: Logo and Nav Links */}
