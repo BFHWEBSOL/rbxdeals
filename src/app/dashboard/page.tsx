@@ -93,11 +93,15 @@ export default function Dashboard() {
               )}
               <div className={`h-12 flex items-center gap-1 px-6 rounded-xl border font-bold text-lg min-w-[90px] justify-center ${theme === 'dark' ? 'bg-[#202123] border-[#3E3F4B] text-[#10A37F]' : 'bg-[#F7F7F8] border-[#10A37F] text-[#10A37F]'}`}>
                 <span>{typeof user.robuxBalance === 'number' ? user.robuxBalance : '0.5'}</span>
-                <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="10" stroke="#10a37f" strokeWidth="2"/>
-                  <rect x="8" y="8" width="8" height="8" rx="2" fill="#10a37f"/>
-                  <text x="12" y="16" textAnchor="middle" fontSize="10" fill="white" fontWeight="bold">R$</text>
-                </svg>
+                <img
+                  src="/images/rbx.svg"
+                  alt="Robux Icon"
+                  width={24}
+                  height={24}
+                  style={{
+                    filter: theme === 'dark' ? 'invert(1) brightness(2)' : 'invert(41%) sepia(97%) saturate(749%) hue-rotate(104deg) brightness(1.1)',
+                  }}
+                />
               </div>
             </div>
             <button
