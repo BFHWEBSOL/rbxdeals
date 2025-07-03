@@ -7,35 +7,24 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'main-bg': {
-          light: '#FFFFFF',
-          dark: '#343541',
-        },
-        'sidebar-bg': {
-          light: '#F7F7F8',
-          dark: '#202123',
-        },
-        'card-bg': {
-          light: '#F7F7F8',
-          dark: '#202123',
-        },
-        'primary-text': {
-          light: '#000000',
-          dark: '#ECECF1',
-        },
-        'muted-text': {
-          light: '#6E6E80',
-          dark: '#8E8EA0',
-        },
-        'accent': '#10A37F',
-        'hover': {
-          light: '#E7E7E9',
-          dark: '#2A2B32',
-        },
-        'border': {
-          light: '#D9D9E3',
-          dark: '#3E3F4B',
-        },
+        primary: '#FF4444',
+        'primary-dark': '#CC0000',
+        'primary-light': '#FF7777',
+        secondary: '#007AFF',
+        'secondary-dark': '#0051B8',
+        'secondary-light': '#66B3FF',
+        success: '#22C55E',
+        'success-dark': '#15803D',
+        'success-light': '#BBF7D0',
+        warning: '#F97316',
+        error: '#DC2626',
+        background: '#FFFFFF',
+        surface: '#F8F9FA',
+        border: '#E5E5E5',
+        'text-primary': '#212121',
+        'text-secondary': '#555555',
+        'text-disabled': '#9CA3AF',
+        robux: '#1CBB4F',
       },
       borderRadius: {
         '2xl': '1rem',
