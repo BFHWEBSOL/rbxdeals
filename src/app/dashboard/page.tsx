@@ -3,18 +3,6 @@ import React, { useState } from "react";
 import { useSession } from "../../context/SessionContext";
 import { useRouter } from "next/navigation";
 
-function useTheme(): [string, React.Dispatch<React.SetStateAction<string>>] {
-  const [theme, setTheme] = useState<string>(
-    typeof window !== "undefined" ? localStorage.getItem("theme") || "dark" : "dark"
-  );
-  React.useEffect(() => {
-    document.documentElement.classList.remove("dark", "light");
-    document.documentElement.classList.add(theme);
-    localStorage.setItem("theme", theme);
-  }, [theme]);
-  return [theme, setTheme];
-}
-
 const sidebarLinks = [
   { label: "Earn Robux", icon: "💰" },
   { label: "Withdraw", icon: "⬇️" },
@@ -26,15 +14,14 @@ export default function Dashboard() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showWithdraw, setShowWithdraw] = useState(false);
   const [activeTab, setActiveTab] = useState("Earn Robux");
-  const [theme] = useTheme();
   React.useEffect(() => { if (mounted && !user) router.push("/"); }, [user, router, mounted]);
   if (!mounted) return null;
   if (!user) return null;
 
   return (
-    <div className={`min-h-screen flex ${theme === 'dark' ? 'bg-[#343541]' : 'bg-[#FFFFFF]'} text-white`}>
+    <div className="min-h-screen flex bg-[#FFFFFF] text-[#23272e]">
       {/* Sidebar */}
-      <aside className={`w-64 min-h-screen flex flex-col py-8 px-4 border-r ${theme === 'dark' ? 'bg-[#202123] border-[#3E3F4B]' : 'bg-[#F7F7F8] border-[#D9D9E3]'}`}>
+      <aside className="w-64 min-h-screen flex flex-col py-8 px-4 border-r bg-[#F7F7F8] border-[#D9D9E3]">
         <div className="text-2xl font-extrabold tracking-tight mb-10 select-none">
           <span>RBX</span><span style={{ color: '#10a37f' }}>Deals</span>
         </div>
@@ -44,8 +31,8 @@ export default function Dashboard() {
               key={link.label}
               className={`flex items-center gap-3 px-4 py-3 rounded-xl transition text-lg font-medium mb-2
                 ${activeTab === link.label
-                  ? `${theme === 'dark' ? 'border-2 border-[#10A37F] bg-[#202123] text-[#10A37F]' : 'border-2 border-[#10A37F] bg-[#F7F7F8] text-[#10A37F] shadow-[0_0_0_2px_#10A37F]'}`
-                  : `${theme === 'dark' ? 'text-[#8E8EA0] hover:bg-[#2A2B32]' : 'text-[#6E6E80] hover:bg-[#E7E7E9]'}`}
+                  ? 'border-2 border-[#10A37F] bg-[#F7F7F8] text-[#10A37F] shadow-[0_0_0_2px_#10A37F]'
+                  : 'text-[#6E6E80] hover:bg-[#E7E7E9]'}
               `}
               onClick={() => {
                 setActiveTab(link.label);
@@ -54,27 +41,27 @@ export default function Dashboard() {
               }}
               style={activeTab === link.label ? { boxShadow: "0 0 0 2px #7dd3fc" } : {}}
             >
-              <span className={`text-xl ${activeTab === link.label ? 'text-[#10A37F]' : theme === 'dark' ? 'text-[#8E8EA0]' : 'text-[#6E6E80]'}`}>{link.icon}</span>
+              <span className={`text-xl ${activeTab === link.label ? 'text-[#10A37F]' : 'text-[#6E6E80]'}`}>{link.icon}</span>
               <span className={activeTab === link.label ? "font-bold" : ""}>{link.label}</span>
             </button>
           ))}
         </nav>
       </aside>
       {/* Main Content */}
-      <div className={`flex-1 flex flex-col min-h-screen ${theme === 'dark' ? 'bg-[#343541]' : 'bg-[#FFFFFF]'}`}>
+      <div className="flex-1 flex flex-col min-h-screen bg-[#FFFFFF]">
         {/* Header */}
-        <header className={`flex items-center justify-between px-8 py-4 border-b ${theme === 'dark' ? 'bg-[#343541] border-[#3E3F4B]' : 'bg-[#FFFFFF] border-[#D9D9E3]'}`}>
+        <header className="flex items-center justify-between px-8 py-4 border-b bg-[#FFFFFF] border-[#D9D9E3]">
           <div className="text-2xl font-extrabold tracking-tight select-none">
             <span>RBX</span><span style={{ color: '#10a37f' }}>Deals</span>
           </div>
           <div className="flex items-center gap-4">
-            <select className="h-12 min-w-[120px] rounded-xl px-4 py-2 bg-transparent border text-base font-medium appearance-none focus:outline-none border-[#343541] text-white">
+            <select className="h-12 min-w-[120px] rounded-xl px-4 py-2 bg-transparent border text-base font-medium appearance-none focus:outline-none border-[#343541] text-[#23272e]">
               <option>English</option>
             </select>
             <div className="h-12 w-px bg-[#343541] mx-2 hidden md:block" />
             <div className="flex items-center gap-3 relative">
               <div
-                className={`h-12 w-12 flex items-center justify-center rounded-xl border-2 border-[#10a37f] bg-[#23272F] cursor-pointer hover:scale-110 transition-all duration-150 ${dropdownOpen ? "ring-2 ring-blue-500" : ""}`}
+                className={`h-12 w-12 flex items-center justify-center rounded-xl border-2 border-[#10a37f] bg-[#F7F7F8] cursor-pointer hover:scale-110 transition-all duration-150 ${dropdownOpen ? "ring-2 ring-blue-500" : ""}`}
                 onClick={() => setDropdownOpen((open) => !open)}
                 tabIndex={0}
                 onBlur={() => setTimeout(() => setDropdownOpen(false), 150)}
@@ -84,14 +71,14 @@ export default function Dashboard() {
               </div>
               {/* Dropdown menu */}
               {dropdownOpen && (
-                <div className={`absolute top-14 left-0 z-50 w-56 rounded-xl shadow-lg ${theme === 'dark' ? 'bg-[#282a36] text-white' : 'bg-white text-[#202123]'} py-2 flex flex-col gap-1 animate-fade-in`} tabIndex={-1}>
-                  <button className="text-left px-5 py-3 text-lg hover:bg-[#23272F] rounded-lg transition" onClick={() => setDropdownOpen(false)}>Profile</button>
-                  <button className="text-left px-5 py-3 text-lg hover:bg-[#23272F] rounded-lg transition" onClick={() => setDropdownOpen(false)}>Offer history</button>
-                  <button className="text-left px-5 py-3 text-lg hover:bg-[#23272F] rounded-lg transition" onClick={() => setDropdownOpen(false)}>Withdraw history</button>
-                  <button className="text-left px-5 py-3 text-lg hover:bg-[#23272F] rounded-lg transition text-red-400" onClick={() => { setUser(null); setDropdownOpen(false); }}>Sign out</button>
+                <div className="absolute top-14 left-0 z-50 w-56 rounded-xl shadow-lg bg-white text-[#202123] py-2 flex flex-col gap-1 animate-fade-in" tabIndex={-1}>
+                  <button className="text-left px-5 py-3 text-lg hover:bg-[#F7F7F8] rounded-lg transition" onClick={() => setDropdownOpen(false)}>Profile</button>
+                  <button className="text-left px-5 py-3 text-lg hover:bg-[#F7F7F8] rounded-lg transition" onClick={() => setDropdownOpen(false)}>Offer history</button>
+                  <button className="text-left px-5 py-3 text-lg hover:bg-[#F7F7F8] rounded-lg transition" onClick={() => setDropdownOpen(false)}>Withdraw history</button>
+                  <button className="text-left px-5 py-3 text-lg hover:bg-[#F7F7F8] rounded-lg transition text-red-400" onClick={() => { setUser(null); setDropdownOpen(false); }}>Sign out</button>
                 </div>
               )}
-              <div className={`h-12 flex items-center gap-1 px-6 rounded-xl border font-bold text-lg min-w-[90px] justify-center ${theme === 'dark' ? 'bg-[#202123] border-[#3E3F4B] text-[#10A37F]' : 'bg-[#F7F7F8] border-[#10A37F] text-[#10A37F]'}`}>
+              <div className="h-12 flex items-center gap-1 px-6 rounded-xl border font-bold text-lg min-w-[90px] justify-center bg-[#F7F7F8] border-[#10A37F] text-[#10A37F]">
                 <span>{typeof user.robuxBalance === 'number' ? user.robuxBalance : '0.5'}</span>
                 <img
                   src="/images/rbx.svg"
@@ -99,7 +86,7 @@ export default function Dashboard() {
                   width={24}
                   height={24}
                   style={{
-                    filter: theme === 'dark' ? 'invert(1) brightness(2)' : 'invert(41%) sepia(97%) saturate(749%) hue-rotate(104deg) brightness(1.1)',
+                    filter: 'invert(41%) sepia(97%) saturate(749%) hue-rotate(104deg) brightness(1.1)',
                   }}
                 />
               </div>
@@ -109,10 +96,10 @@ export default function Dashboard() {
         {/* Main Sections */}
         {activeTab === "Earn Robux" && (
           <main className="flex-1 p-8 flex flex-col items-center justify-center">
-            <section className={`${theme === 'dark' ? 'bg-[#202123]' : 'bg-[#F7F7F8]'} rounded-2xl shadow-[0_4px_24px_0_rgba(16,163,127,0.06)] p-6 flex flex-col gap-4 border ${theme === 'dark' ? 'border-[#3E3F4B]' : 'border-[#D9D9E3]'}`} style={{ width: '100%', maxWidth: 700 }}>
-              <h2 className={`text-2xl font-bold mb-4 ${theme === 'dark' ? 'text-[#ECECF1]' : 'text-[#000000]'}`}>Tasks</h2>
-              <p className={`${theme === 'dark' ? 'text-[#8E8EA0]' : 'text-[#6E6E80]'} mb-4`}>Complete offers or watch videos to get robux!</p>
-              <div className="w-full h-96 bg-card-light dark:bg-card-dark rounded-2xl shadow-card-light dark:shadow-card-dark flex items-center justify-center text-secondary-light dark:text-secondary-dark text-lg mb-4">
+            <section className="bg-[#F7F7F8] rounded-2xl shadow-[0_4px_24px_0_rgba(16,163,127,0.06)] p-6 flex flex-col gap-4 border border-[#D9D9E3]" style={{ width: '100%', maxWidth: 700 }}>
+              <h2 className="text-2xl font-bold mb-4 text-[#000000]">Tasks</h2>
+              <p className="text-[#6E6E80] mb-4">Complete offers or watch videos to get robux!</p>
+              <div className="w-full h-96 bg-white rounded-2xl shadow-card-light flex items-center justify-center text-secondary-light text-lg mb-4">
                 <iframe
                   sandbox="allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation allow-popups-to-escape-sandbox"
                   src={`https://cdnnd.com/list/Fh5A?subid=${user.userId}`}
@@ -126,44 +113,44 @@ export default function Dashboard() {
         )}
         {showWithdraw && activeTab === "Withdraw" && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
-            <div className={`${theme === 'dark' ? 'bg-[#23272F]' : 'bg-white'} rounded-2xl shadow-2xl p-8 w-full max-w-2xl relative border ${theme === 'dark' ? 'border-[#343541]' : 'border-[#e5e7eb]'}`}>
-              <button className="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl" onClick={() => setShowWithdraw(false)}>&times;</button>
-              <h2 className="text-3xl font-bold mb-6 text-white">Withdraw robux</h2>
-              <div className={`${theme === 'dark' ? 'bg-[#202123]' : 'bg-[#f3f4f6]'} rounded-xl p-6 mb-6 flex flex-col gap-6 border ${theme === 'dark' ? 'border-[#343541]' : 'border-[#e5e7eb]'}`}>
+            <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-2xl relative border border-[#e5e7eb]">
+              <button className="absolute top-4 right-4 text-gray-400 hover:text-[#23272e] text-2xl" onClick={() => setShowWithdraw(false)}>&times;</button>
+              <h2 className="text-3xl font-bold mb-6 text-[#23272e]">Withdraw robux</h2>
+              <div className="bg-[#f3f4f6] rounded-xl p-6 mb-6 flex flex-col gap-6 border border-[#e5e7eb]">
                 <div className="flex flex-col items-center justify-center mb-6">
                   <div className="text-gray-400 text-sm mb-1">Your balance:</div>
                   <div className="text-2xl font-bold text-green-400 flex items-center gap-1">{user.robuxBalance} <svg width='20' height='20' fill='none' viewBox='0 0 24 24'><circle cx='12' cy='12' r='10' stroke='#10a37f' strokeWidth='2'/><rect x='8' y='8' width='8' height='8' rx='2' fill='#10a37f'/></svg></div>
                 </div>
                 <div className="mb-2">
                   <div className="text-gray-400 text-sm mb-1">Select game</div>
-                  <div className={`flex items-center ${theme === 'dark' ? 'bg-[#282a36]' : 'bg-[#f3f4f6]'} rounded-xl px-4 py-3 mb-2 border ${theme === 'dark' ? 'border-[#343541]' : 'border-[#e5e7eb]'}`}>
+                  <div className="flex items-center bg-[#f3f4f6] rounded-xl px-4 py-3 mb-2 border border-[#e5e7eb]">
                     <img src="/images/robux-coins.png" alt="Game" className="w-10 h-10 rounded-lg mr-4" />
-                    <span className="text-lg text-white font-medium">salakkaaz&apos;s Place</span>
+                    <span className="text-lg text-[#23272e] font-medium">salakkaaz&apos;s Place</span>
                     <button className="ml-auto text-green-400 hover:underline text-sm font-semibold" onClick={() => {}}>Create new game</button>
                   </div>
                 </div>
                 <div className="mb-2">
                   <div className="text-gray-400 text-sm mb-1">How much would you like to withdraw?</div>
                   <div className="text-xs text-gray-500 mb-2">Between 5 and 1500</div>
-                  <input type="number" min={5} max={1500} className={`w-full rounded-xl px-4 py-3 ${theme === 'dark' ? 'bg-[#181A20] text-white' : 'bg-white text-[#202123]'} border ${theme === 'dark' ? 'border-[#343541]' : 'border-[#e5e7eb]'} text-lg focus:outline-none focus:ring-2 focus:ring-green-400`} placeholder="" />
+                  <input type="number" min={5} max={1500} className="w-full rounded-xl px-4 py-3 bg-white text-[#202123] border border-[#e5e7eb] text-lg focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="" />
                 </div>
                 <div className="flex flex-col gap-2 mt-4">
-                  <div className={`flex items-center gap-2 ${theme === 'dark' ? 'bg-[#232b36] border-[#2e3742] text-blue-200' : 'bg-blue-50 border-blue-200 text-blue-800'} border rounded-lg px-4 py-3 text-sm`}>
+                  <div className="flex items-center gap-2 bg-blue-50 border-blue-200 text-blue-800 border rounded-lg px-4 py-3 text-sm">
                     <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="#10a37f" strokeWidth="2"/><rect x="8" y="8" width="8" height="8" rx="2" fill="#10a37f"/></svg>
                     We pay the roblox creator tax (30%) for you! That&apos;s why we will expect to find a pass with the value as price in the selected server.
                   </div>
-                  <div className={`flex items-center gap-2 ${theme === 'dark' ? 'bg-[#2e2620] border-[#bfa76a] text-yellow-200' : 'bg-yellow-50 border-yellow-200 text-yellow-800'} border rounded-lg px-4 py-3 text-sm`}>
+                  <div className="flex items-center gap-2 bg-yellow-50 border-yellow-200 text-yellow-800 border rounded-lg px-4 py-3 text-sm">
                     <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="#fbbf24" strokeWidth="2"/><rect x="8" y="8" width="8" height="8" rx="2" fill="#fbbf24"/></svg>
                     Make sure to turn off &quot;Regional Price&quot; when creating a gamepass for withdrawing!
                   </div>
                 </div>
-                <button className={`mt-8 w-full rounded-xl font-bold text-lg py-4 transition ${theme === 'dark' ? 'bg-[#10a37f] hover:bg-green-700 text-white' : 'bg-[#10a37f] hover:bg-green-700 text-white'}`}>Redeem</button>
+                <button className="mt-8 w-full rounded-xl font-bold text-lg py-4 transition bg-[#10a37f] hover:bg-green-700 text-white">Redeem</button>
               </div>
             </div>
           </div>
         )}
         {/* Footer */}
-        <footer className={`${theme === 'dark' ? 'bg-[#202123] border-[#3E3F4B]' : 'bg-[#F7F7F8] border-[#D9D9E3]'} border-t px-8 py-8 mt-8`}>
+        <footer className="bg-[#F7F7F8] border-[#D9D9E3] border-t px-8 py-8 mt-8">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:justify-between gap-8">
             <div className="flex-1 flex flex-col gap-4">
               <div className="text-2xl font-extrabold tracking-tight select-none">
@@ -199,10 +186,8 @@ export default function Dashboard() {
               <div>
                 <div className="font-bold mb-2">Help & Support</div>
                 <ul className="space-y-1 text-sm">
-                  <li><a href="#" className="hover:text-green-400">Help center</a></li>
-                  <li><a href="#" className="hover:text-green-400">How to earn free robux</a></li>
-                  <li><a href="#" className="hover:text-green-400">How to withdraw</a></li>
-                  <li><a href="#" className="hover:text-green-400">Missing robux?</a></li>
+                  <li><a href="#" className="hover:text-green-400">Help Center</a></li>
+                  <li><a href="#" className="hover:text-green-400">Contact Support</a></li>
                 </ul>
               </div>
               <div>
@@ -213,9 +198,6 @@ export default function Dashboard() {
                 </ul>
               </div>
             </div>
-          </div>
-          <div className="text-xs text-center mt-8 opacity-70">
-            ©2025 RBXDeals. All rights reserved. Not affiliated with ROBLOX Corporation.
           </div>
         </footer>
       </div>

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { db } from "@/lib/firebase";
 import { doc, getDoc } from "firebase/firestore";
@@ -56,28 +56,7 @@ const faqs: Faq[] = [
   },
 ];
 
-function useTheme(): [string, React.Dispatch<React.SetStateAction<string>>] {
-  const [theme, setTheme] = useState<string>("dark");
-
-  useEffect(() => {
-    // Only run on client
-    const stored = localStorage.getItem("theme");
-    if (stored && stored !== theme) {
-      setTheme(stored);
-    }
-  }, []);
-
-  useEffect(() => {
-    document.documentElement.classList.remove("dark", "light");
-    document.documentElement.classList.add(theme);
-    localStorage.setItem("theme", theme);
-  }, [theme]);
-
-  return [theme, setTheme];
-}
-
 export default function RBXDealsLanding() {
-  const [theme, setTheme] = useTheme();
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [username, setUsername] = useState("");
@@ -95,9 +74,9 @@ export default function RBXDealsLanding() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   return (
-    <div className={`min-h-screen w-full font-sans ${theme === "dark" ? "bg-main-bg-dark text-primary-text-dark" : "bg-main-bg-light text-primary-text-light"}`}>
+    <div className="min-h-screen w-full font-sans bg-main-bg-light text-primary-text-light">
       {/* Sticky Header */}
-      <header className={`sticky top-0 z-30 w-full ${theme === "dark" ? "bg-main-bg-dark border-b border-border-dark" : "bg-main-bg-light border-b border-border-light"} transition-colors`}>
+      <header className="sticky top-0 z-30 w-full bg-main-bg-light border-b border-border-light transition-colors">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-8 py-4">
           {/* Logo */}
           <div className="text-2xl font-extrabold tracking-tight select-none">
@@ -114,7 +93,7 @@ export default function RBXDealsLanding() {
             {/* Language Selector */}
             <div className="h-14 flex items-center">
               <select
-                className={`h-14 min-w-[120px] rounded-xl px-4 py-2 bg-transparent border text-base font-medium appearance-none focus:outline-none transition-all duration-150 ${theme === "dark" ? "border-border-dark text-primary-text-dark" : "border-border-light text-primary-text-light"}`}
+                className="h-14 min-w-[120px] rounded-xl px-4 py-2 bg-transparent border text-base font-medium appearance-none focus:outline-none transition-all duration-150 border-border-light text-primary-text-light"
                 style={{ boxSizing: 'border-box' }}
               >
                 <option value="en">English</option>
@@ -122,12 +101,12 @@ export default function RBXDealsLanding() {
                 <option value="fr">Français</option>
               </select>
             </div>
-            <div className="h-14 w-px bg-border-dark mx-2 hidden md:block" />
+            <div className="h-14 w-px bg-border-light mx-2 hidden md:block" />
             {/* User Avatar + Balance */}
             {user ? (
               <div className="flex items-center gap-3 relative h-14">
                 <div
-                  className={`h-14 w-14 flex items-center justify-center rounded-xl border-2 cursor-pointer transition-all duration-150 ${dropdownOpen ? "border-accent scale-105" : theme === "dark" ? "border-accent bg-sidebar-bg-dark" : "border-accent bg-main-bg-light hover:scale-110"}`}
+                  className={`h-14 w-14 flex items-center justify-center rounded-xl border-2 cursor-pointer transition-all duration-150 border-accent bg-main-bg-light hover:scale-110 ${dropdownOpen ? "border-accent scale-105" : ""}`}
                   onClick={() => setDropdownOpen((open) => !open)}
                   tabIndex={0}
                   onBlur={() => setTimeout(() => setDropdownOpen(false), 150)}
@@ -135,7 +114,7 @@ export default function RBXDealsLanding() {
                 >
                   <img src={user?.avatarUrl || "/avatar-placeholder.png"} alt="User avatar" className="w-12 h-12 rounded-lg object-cover transition-transform duration-150" />
                 </div>
-                <div className={`h-14 flex items-center gap-1 px-6 rounded-xl border font-bold text-lg min-w-[90px] justify-center ${theme === "dark" ? "bg-sidebar-bg-dark border-border-dark text-accent" : "bg-card-bg-light border-accent text-accent"}`}
+                <div className="h-14 flex items-center gap-1 px-6 rounded-xl border font-bold text-lg min-w-[90px] justify-center bg-card-bg-light border-accent text-accent"
                   style={{ boxSizing: 'border-box' }}
                 >
                   <span>{typeof user?.robuxBalance === 'number' ? user.robuxBalance : '0.5'}</span>
@@ -147,7 +126,7 @@ export default function RBXDealsLanding() {
                 </div>
                 {/* Dropdown menu */}
                 {dropdownOpen && (
-                  <div className={`absolute top-14 left-0 z-50 w-48 rounded-xl shadow-lg ${theme === "dark" ? "bg-hover-dark text-primary-text-dark" : "bg-main-bg-light text-primary-text-light"} py-2 flex flex-col gap-1 animate-fade-in`}
+                  <div className="absolute top-14 left-0 z-50 w-48 rounded-xl shadow-lg bg-main-bg-light text-primary-text-light py-2 flex flex-col gap-1 animate-fade-in"
                     tabIndex={-1}
                   >
                     <button className="text-left px-4 py-2 hover:bg-hover-dark rounded-lg transition" onClick={() => setDropdownOpen(false)}>Profile</button>
@@ -165,18 +144,6 @@ export default function RBXDealsLanding() {
                 Sign In
               </button>
             )}
-            {/* Theme Toggle */}
-            <button
-              aria-label="Toggle theme"
-              className="rounded-lg p-2 hover:bg-hover-dark transition"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            >
-              {theme === "dark" ? (
-                <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.07l-.71.71M21 12h-1M4 12H3m16.66 5.66l-.71-.71M4.05 4.93l-.71-.71M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
-              ) : (
-                <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" /></svg>
-              )}
-            </button>
           </div>
         </div>
       </header>
@@ -214,22 +181,22 @@ export default function RBXDealsLanding() {
       <section className="w-full max-w-7xl mx-auto px-4 md:px-8 py-16" id="earn">
         <h2 className="text-3xl md:text-4xl font-bold mb-10">How You Can Earn Free Robux</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-          <div className={`rounded-2xl p-6 flex flex-col items-center text-center shadow-lg ${theme === "dark" ? "bg-card-bg-dark" : "bg-card-bg-light"}`}>
+          <div className="rounded-2xl p-6 flex flex-col items-center text-center shadow-lg bg-card-bg-light">
             <span className="text-4xl mb-3">🛡️</span>
             <div className="font-bold text-lg mb-1">Complete easy tasks</div>
             <div className="text-sm text-gray-400">Surveys, mobile games</div>
           </div>
-          <div className={`rounded-2xl p-6 flex flex-col items-center text-center shadow-lg ${theme === "dark" ? "bg-card-bg-dark" : "bg-card-bg-light"}`}>
+          <div className="rounded-2xl p-6 flex flex-col items-center text-center shadow-lg bg-card-bg-light">
             <span className="text-4xl mb-3">🏷️</span>
             <div className="font-bold text-lg mb-1">Redeem promocodes</div>
             <div className="text-sm text-gray-400">Get bonus Robux from promo codes</div>
           </div>
-          <div className={`rounded-2xl p-6 flex flex-col items-center text-center shadow-lg ${theme === "dark" ? "bg-card-bg-dark" : "bg-card-bg-light"}`}>
+          <div className="rounded-2xl p-6 flex flex-col items-center text-center shadow-lg bg-card-bg-light">
             <span className="text-4xl mb-3">💸</span>
             <div className="font-bold text-lg mb-1">Withdraw your Robux</div>
             <div className="text-sm text-gray-400">Minimum withdrawal after 5–7 Robux via game pass/private server</div>
           </div>
-          <div className={`rounded-2xl p-6 flex flex-col items-center text-center shadow-lg ${theme === "dark" ? "bg-card-bg-dark" : "bg-card-bg-light"}`}>
+          <div className="rounded-2xl p-6 flex flex-col items-center text-center shadow-lg bg-card-bg-light">
             <span className="text-4xl mb-3">🎁</span>
             <div className="font-bold text-lg mb-1">Enjoy more rewards</div>
             <div className="text-sm text-gray-400">Level-up bonuses, events, giveaways</div>
@@ -245,7 +212,7 @@ export default function RBXDealsLanding() {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           {blogs.map((blog, i) => (
-            <div key={i} className={`rounded-2xl p-6 shadow-lg flex flex-col gap-2 ${theme === "dark" ? "bg-card-bg-dark" : "bg-card-bg-light"}`}>
+            <div key={i} className="rounded-2xl p-6 shadow-lg flex flex-col gap-2 bg-card-bg-light">
               <div className="font-bold text-lg mb-1">{blog.title}</div>
               <div className="text-xs text-gray-400 mb-2">{blog.date}</div>
               <div className="text-sm text-gray-300">{blog.desc}</div>
@@ -280,7 +247,7 @@ export default function RBXDealsLanding() {
       </section>
 
       {/* Footer */}
-      <footer className={`w-full ${theme === "dark" ? "bg-main-bg-dark text-gray-400" : "bg-main-bg-light text-gray-700"} pt-12 pb-6 px-4 md:px-8 mt-8`}>
+      <footer className="w-full bg-main-bg-light text-gray-700 pt-12 pb-6 px-4 md:px-8 mt-8">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:justify-between gap-8">
           {/* Left: Logo + tagline */}
           <div className="flex-1 flex flex-col gap-4">
@@ -340,7 +307,7 @@ export default function RBXDealsLanding() {
       {/* Modal for Roblox username signup/login */}
       {modalOpen && !showConfirm && (
         <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
-          <div className={`rounded-2xl p-8 w-full max-w-md shadow-xl relative mx-2 ${theme === "dark" ? "bg-sidebar-bg-dark" : "bg-card-bg-light"}`}>
+          <div className="rounded-2xl p-8 w-full max-w-md shadow-xl relative mx-2 bg-card-bg-light">
             <button
               className="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl"
               onClick={() => setModalOpen(false)}
@@ -396,7 +363,7 @@ export default function RBXDealsLanding() {
               className="flex flex-col gap-4"
             >
               <input
-                className={`rounded-xl border px-4 py-3 text-lg focus:outline-none focus:ring-2 ${theme === "dark" ? "border-border-dark bg-main-bg-dark text-primary-text-dark focus:ring-accent" : "border-accent bg-card-bg-light text-primary-text-light focus:ring-accent"}`}
+                className="rounded-xl border px-4 py-3 text-lg focus:outline-none focus:ring-2 border-border-light bg-card-bg-light text-primary-text-light focus:ring-accent"
                 placeholder="Roblox username"
                 value={username}
                 onChange={e => setUsername(e.target.value)}
@@ -418,7 +385,7 @@ export default function RBXDealsLanding() {
       {/* Confirmation Popup */}
       {modalOpen && showConfirm && robloxUser && (
         <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
-          <div className={`rounded-2xl p-8 w-full max-w-xs shadow-xl relative mx-2 flex flex-col items-center ${theme === "dark" ? "bg-sidebar-bg-dark" : "bg-card-bg-light"}`}>
+          <div className="rounded-2xl p-8 w-full max-w-xs shadow-xl relative mx-2 flex flex-col items-center bg-card-bg-light">
             <img src={robloxUser.avatarUrl} alt="Roblox avatar" className="w-28 h-28 rounded-full mb-4" />
             <div className="text-xl font-bold mb-1">@{robloxUser.username}</div>
             <div className="text-gray-400 mb-6">Is this you?</div>
