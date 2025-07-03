@@ -26,7 +26,7 @@ export default function Dashboard() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showWithdraw, setShowWithdraw] = useState(false);
   const [activeTab, setActiveTab] = useState("Earn Robux");
-  const [theme, setTheme] = useTheme();
+  const [theme] = useTheme();
   React.useEffect(() => { if (mounted && !user) router.push("/"); }, [user, router, mounted]);
   if (!mounted) return null;
   if (!user) return null;
