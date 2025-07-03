@@ -1,3 +1,5 @@
+/* eslint-env node */
+/* eslint-disable no-undef */
 import { NextResponse } from 'next/server';
 import { initializeApp, getApps, cert } from 'firebase-admin/app';
 import { getFirestore, FieldValue } from 'firebase-admin/firestore';
@@ -21,7 +23,6 @@ export async function GET(request) {
     const subid = searchParams.get('subid');
     const virtual_currency = searchParams.get('virtual_currency');
     const password = searchParams.get('password');
-    const network = searchParams.get('network');
 
     // Security: Check password
     if (password !== 'P@55w0rdForPostback2025') {
