@@ -32,4 +32,96 @@ export const cpaPostback = functions.https.onRequest(async (req, res) => {
     });
   }
   res.status(200).send('OK');
+});
+
+// Secret key for postback validation
+const POSTBACK_SECRET = 'P@55w0rdForPostback2025';
+
+export const postback = functions.https.onRequest(async (req, res) => {
+  try {
+    if (req.method !== 'GET') {
+      res.status(405).send('Method Not Allowed');
+      return;
+    }
+
+    const {
+      network,
+      subid,
+      virtual_currency,
+      reward,
+      password,
+      lead_id,
+    } = req.query;
+
+    // Log incoming request
+    console.log('Received postback:', req.query);
+
+    // Security: Check password
+    if (password !== POSTBACK_SECRET) {
+      console.warn('Invalid password for postback:', password);
+      res.status(403).send('Forbidden');
+      return;
+    }
+
+    // Validate required parameters
+    if (!network || !subid) {
+      res.status(400).send('Missing network or subid');
+      return;
+    }
+
+    // Determine points field and value
+    let points: number | undefined;
+    if (network === 'cpalead') {
+      points = Number(virtual_currency);
+    } else {
+      points = Number(reward);
+    }
+
+    if (!points || isNaN(points) || points <= 0) {
+      res.status(400).send('Invalid or missing points value');
+      return;
+    }
+
+    // Prevent double-crediting using lead_id
+    if (lead_id) {
+      const convRef = db.collection('conversions').doc(lead_id as string);
+      const convSnap = await convRef.get();
+      if (convSnap.exists) {
+        console.log('Duplicate conversion:', lead_id);
+        res.status(200).send('OK');
+        return;
+      }
+      // Mark this conversion as processed
+      await convRef.set({
+        subid,
+        network,
+        points,
+        timestamp: admin.firestore.FieldValue.serverTimestamp(),
+      });
+    }
+
+    // Atomically increment user's points
+    const userRef = db.collection('users').doc(subid as string);
+    await db.runTransaction(async (transaction) => {
+      const userSnap = await transaction.get(userRef);
+      if (!userSnap.exists) {
+        throw new functions.https.HttpsError('not-found', 'User not found');
+      }
+      transaction.update(userRef, {
+        points: admin.firestore.FieldValue.increment(points),
+      });
+    });
+
+    console.log(
+      `Credited ${points} points to user ${subid} for network ${network}`
+    );
+    res.status(200).send('OK');
+  } catch (error: any) {
+    console.error('Postback error:', error);
+    if (error instanceof functions.https.HttpsError && error.code === 'not-found') {
+      res.status(404).send('User not found');
+    } else {
+      res.status(500).send('Internal Server Error');
+    }
+  }
 }); 
