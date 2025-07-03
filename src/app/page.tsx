@@ -193,7 +193,13 @@ export default function RBXDealsLanding() {
           <div className="flex gap-4 flex-wrap">
             <button
               className="bg-accent hover:bg-accent-hover text-white px-8 py-3 rounded-xl font-bold text-lg shadow transition"
-              onClick={() => setModalOpen(true)}
+              onClick={() => {
+                if (user) {
+                  router.push("/dashboard");
+                } else {
+                  setModalOpen(true);
+                }
+              }}
             >
               Start Earning
             </button>
