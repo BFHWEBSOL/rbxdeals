@@ -15,17 +15,30 @@ export default function Dashboard() {
   const [showWithdraw, setShowWithdraw] = useState(false);
   const [activeTab, setActiveTab] = useState("Earn Robux");
   React.useEffect(() => { if (mounted && !user) router.push("/"); }, [user, router, mounted]);
+  React.useEffect(() => {
+    if (activeTab === "Earn Robux") {
+      const script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = 'https://rileymarker.com/script_include.php?id=806954';
+      script.async = true;
+      const container = document.getElementById('dashboard-offerwall');
+      if (container) container.appendChild(script);
+      return () => {
+        if (container && script.parentNode) script.parentNode.removeChild(script);
+      };
+    }
+  }, [activeTab]);
   if (!mounted) return null;
   if (!user) return null;
 
   return (
-    <div className="min-h-screen flex bg-[#FFFFFF] text-[#23272e]">
+    <div className="min-h-screen flex flex-col md:flex-row bg-[#FFFFFF] text-[#23272e]">
       {/* Sidebar */}
-      <aside className="w-64 min-h-screen flex flex-col py-8 px-4 border-r bg-[#F7F7F8] border-[#D9D9E3]">
-        <div className="text-2xl font-extrabold tracking-tight mb-10 select-none">
+      <aside className="w-full md:w-64 min-h-0 md:min-h-screen flex flex-row md:flex-col py-4 md:py-8 px-2 md:px-4 border-b md:border-b-0 md:border-r bg-[#F7F7F8] border-[#D9D9E3]">
+        <div className="text-2xl font-extrabold tracking-tight mb-6 md:mb-10 select-none flex-1 flex items-center md:block">
           <span>Robuminer</span>
         </div>
-        <nav className="flex flex-col gap-2">
+        <nav className="flex flex-row md:flex-col gap-2 flex-1">
           {sidebarLinks.map(link => (
             <button
               key={link.label}
@@ -50,18 +63,15 @@ export default function Dashboard() {
       {/* Main Content */}
       <div className="flex-1 flex flex-col min-h-screen bg-[#FFFFFF]">
         {/* Header */}
-        <header className="flex items-center justify-between px-8 py-4 border-b bg-[#FFFFFF] border-[#D9D9E3]">
-          <div className="text-2xl font-extrabold tracking-tight select-none">
+        <header className="flex flex-col sm:flex-row items-center justify-between px-4 md:px-8 py-4 border-b bg-[#f8f8f8] border-[#D9D9E3] w-full">
+          <div className="text-2xl font-extrabold tracking-tight select-none mb-2 sm:mb-0">
             <span>Robuminer</span>
           </div>
           <div className="flex items-center gap-4">
-            <select className="h-12 min-w-[120px] rounded-xl px-4 py-2 bg-transparent border text-base font-medium appearance-none focus:outline-none border-[#343541] text-[#23272e]">
-              <option>English</option>
-            </select>
-            <div className="h-12 w-px bg-[#343541] mx-2 hidden md:block" />
+            {/* User Avatar + Balance */}
             <div className="flex items-center gap-3 relative">
               <div
-                className={`h-12 w-12 flex items-center justify-center rounded-xl border-2 border-[#10a37f] bg-[#F7F7F8] cursor-pointer hover:scale-110 transition-all duration-150 ${dropdownOpen ? "ring-2 ring-blue-500" : ""}`}
+                className={`h-12 w-12 flex items-center justify-center rounded-full border-2 border-[#10a37f] bg-[#F7F7F8] cursor-pointer hover:scale-110 transition-all duration-150 ${dropdownOpen ? "ring-2 ring-blue-500" : ""}`}
                 onClick={() => setDropdownOpen((open) => !open)}
                 tabIndex={0}
                 onBlur={() => setTimeout(() => setDropdownOpen(false), 150)}
@@ -99,15 +109,7 @@ export default function Dashboard() {
             <section className="bg-[#F7F7F8] rounded-2xl shadow-[0_4px_24px_0_rgba(16,163,127,0.06)] p-6 flex flex-col gap-4 border border-[#D9D9E3]" style={{ width: '100%', maxWidth: 700 }}>
               <h2 className="text-2xl font-bold mb-4 text-[#000000]">Tasks</h2>
               <p className="text-[#6E6E80] mb-4">Complete offers or watch videos to get robux!</p>
-              <div className="w-full h-96 bg-white rounded-2xl shadow-card-light flex items-center justify-center text-secondary-light text-lg mb-4">
-                <iframe
-                  sandbox="allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation allow-popups-to-escape-sandbox"
-                  src={`https://cdnnd.com/list/Fh5A?subid=${user.userId}`}
-                  style={{ width: "100%", height: "100%", border: "none", borderRadius: "1rem" }}
-                  frameBorder="0"
-                  title="CPAlead Offer Wall"
-                ></iframe>
-              </div>
+              <div id="dashboard-offerwall" className="w-full h-96 bg-white rounded-2xl shadow-card-light flex items-center justify-center text-secondary-light text-lg mb-4"></div>
             </section>
           </main>
         )}
