@@ -10,11 +10,6 @@ export default function WithdrawPage() {
   if (!mounted || !user) return null;
   return (
     <div className="min-h-screen flex flex-col bg-[#FFFFFF] text-[#23272e]">
-      <header className="flex flex-col sm:flex-row items-center justify-between px-4 md:px-8 py-4 border-b bg-[#f8f8f8] border-[#D9D9E3] w-full">
-        <div className="text-2xl font-extrabold tracking-tight select-none mb-2 sm:mb-0">
-          <span>Robuminer</span>
-        </div>
-      </header>
       <main className="flex-1 p-8 flex flex-col items-center justify-center">
         <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-2xl relative border border-[#e5e7eb]">
           <h2 className="text-3xl font-bold mb-6 text-[#23272e]">Withdraw robux</h2>
