@@ -3,9 +3,23 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useSession } from "../context/SessionContext";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const { user } = useSession();
+  const pathname = usePathname();
+
+  // Map routes to titles
+  const routeTitles: { [key: string]: string } = {
+    "/Earn": "Earn",
+    "/Withdraw": "Withdraw",
+    "/referrals": "Referrals",
+    "/dashboard": "Dashboard",
+    "/offers": "Offers",
+    "/": "Home",
+  };
+  const pageTitle = routeTitles[pathname] || "";
+
   return (
     <nav className="w-full flex items-center justify-between px-4 md:px-8 py-2 bg-[#f8f8f8] border-b border-[#e3e3e3] fixed top-0 left-0 z-30 h-14">
       {/* Left: Logo and Nav Links */}
@@ -21,13 +35,11 @@ export default function Navbar() {
           </div>
         )}
       </div>
-      {/* Center: Search Bar */}
+      {/* Center: Page Title */}
       <div className="flex-1 flex justify-center">
-        <input
-          type="text"
-          placeholder="Search"
-          className="w-[320px] max-w-full px-4 py-1.5 rounded-lg border border-[#e3e3e3] bg-[#f7f7f7] text-[#23272e] focus:outline-none focus:ring-2 focus:ring-[#c1c1c1]"
-        />
+        {user && pageTitle && (
+          <span className="text-xl font-semibold text-[#23272e]">{pageTitle}</span>
+        )}
       </div>
       {/* Right: User, Notifications, Robux, Settings */}
       {user && (
