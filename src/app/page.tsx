@@ -126,14 +126,7 @@ export default function RobuminerLanding() {
                   </div>
                 )}
               </div>
-            ) : (
-              <button
-                className="bg-accent hover:bg-accent-hover text-white px-6 py-2 rounded-xl font-bold text-base shadow transition"
-                onClick={() => setModalOpen(true)}
-              >
-                Sign In
-              </button>
-            )}
+            ) : null}
           </div>
         </div>
       </header>
