@@ -71,7 +71,6 @@ export default function RobuminerLanding() {
   const { user, setUser } = useSession();
   const router = useRouter();
   const [showConfirm, setShowConfirm] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   return (
     <div className="min-h-screen w-full font-sans bg-main-bg-light text-primary-text-light">
