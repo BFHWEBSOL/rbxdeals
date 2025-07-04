@@ -1,14 +1,10 @@
+"use client";
 import React, { useState, createContext, useContext } from "react";
 import "./globals.css";
 import { SessionProvider } from "../context/SessionContext";
 import Navbar from "../components/Navbar";
 import Modal from "../components/Modal";
 import Login from "../components/Login";
-
-export const metadata = {
-  title: "Robuminer",
-  description: "Earn Robux by completing offers and referrals.",
-};
 
 // Create context for login modal
 const LoginModalContext = createContext<{ open: boolean; setOpen: (v: boolean) => void }>({ open: false, setOpen: () => {} });
