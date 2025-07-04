@@ -35,16 +35,6 @@ export default function OffersPage() {
       <p className="mb-4 text-secondary-light dark:text-secondary-dark text-center">
         Complete offers or watch videos to get robux!
       </p>
-      <h2 className="text-xl font-semibold mb-2">CPALead</h2>
-      <div className="w-full h-[690px] bg-card-light dark:bg-card-dark rounded-2xl shadow-card-light dark:shadow-card-dark flex items-center justify-center text-secondary-light dark:text-secondary-dark text-lg mb-8">
-        <iframe
-          sandbox="allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation allow-popups-to-escape-sandbox"
-          src="https://lnksforyou.com/list/Fh5A"
-          style={{ width: "100%", height: "690px", border: "none" }}
-          frameBorder="0"
-          title="Offer Wall"
-        ></iframe>
-      </div>
       <h2 className="text-xl font-semibold mb-2">CPAGrip Offerwall</h2>
       <div className="w-full bg-card-light dark:bg-card-dark rounded-2xl shadow-card-light dark:shadow-card-dark flex flex-col items-center justify-center text-secondary-light dark:text-secondary-dark text-lg mb-8 p-4">
         <div id="cpagrip-offerwall" style={{ width: '100%' }}></div>
