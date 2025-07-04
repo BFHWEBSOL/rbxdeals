@@ -76,7 +76,7 @@ export default function RobuminerLanding() {
   return (
     <div className="min-h-screen w-full font-sans bg-main-bg-light text-primary-text-light">
       {/* Sticky Header */}
-      <header className="sticky top-0 z-30 w-full bg-main-bg-light border-b border-border-light transition-colors">
+      <header className="sticky top-0 z-30 w-full bg-[#f8f8f8] border-b border-border-light transition-colors">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-8 py-4">
           {/* Logo */}
           <div className="text-2xl font-extrabold tracking-tight select-none">
@@ -90,23 +90,11 @@ export default function RobuminerLanding() {
           </nav>
           {/* Right Controls */}
           <div className="flex items-center gap-4">
-            {/* Language Selector */}
-            <div className="h-14 flex items-center">
-              <select
-                className="h-14 min-w-[120px] rounded-xl px-4 py-2 bg-transparent border text-base font-medium appearance-none focus:outline-none transition-all duration-150 border-border-light text-primary-text-light"
-                style={{ boxSizing: 'border-box' }}
-              >
-                <option value="en">English</option>
-                <option value="es">Español</option>
-                <option value="fr">Français</option>
-              </select>
-            </div>
-            <div className="h-14 w-px bg-border-light mx-2 hidden md:block" />
             {/* User Avatar + Balance */}
             {user ? (
               <div className="flex items-center gap-3 relative h-14">
                 <div
-                  className={`h-14 w-14 flex items-center justify-center rounded-xl border-2 cursor-pointer transition-all duration-150 border-accent bg-main-bg-light hover:scale-110 ${dropdownOpen ? "border-accent scale-105" : ""}`}
+                  className={`h-14 w-14 flex items-center justify-center rounded-xl border-2 cursor-pointer transition-all duration-150 border-accent bg-[#f8f8f8] hover:scale-110 ${dropdownOpen ? "border-accent scale-105" : ""}`}
                   onClick={() => setDropdownOpen((open) => !open)}
                   tabIndex={0}
                   onBlur={() => setTimeout(() => setDropdownOpen(false), 150)}
@@ -126,7 +114,7 @@ export default function RobuminerLanding() {
                 </div>
                 {/* Dropdown menu */}
                 {dropdownOpen && (
-                  <div className="absolute top-14 left-0 z-50 w-48 rounded-xl shadow-lg bg-main-bg-light text-primary-text-light py-2 flex flex-col gap-1 animate-fade-in"
+                  <div className="absolute top-14 left-0 z-50 w-48 rounded-xl shadow-lg bg-[#f8f8f8] text-primary-text-light py-2 flex flex-col gap-1 animate-fade-in"
                     tabIndex={-1}
                   >
                     <button className="text-left px-4 py-2 hover:bg-hover-dark rounded-lg transition" onClick={() => setDropdownOpen(false)}>Profile</button>
