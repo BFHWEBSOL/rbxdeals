@@ -25,7 +25,6 @@ export default function Navbar() {
     "/auth": "Auth",
     "/postback": "Postback",
   };
-  const pageTitle = routeTitles[pathname] || "";
 
   return (
     <nav className="w-full flex items-center justify-between px-4 md:px-8 py-2 bg-[#f8f8f8] border-b border-[#e3e3e3] fixed top-0 left-0 z-30 h-14">
