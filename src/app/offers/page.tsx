@@ -3,8 +3,6 @@ import React from "react";
 import Link from "next/link";
 
 export default function OffersPage() {
-  // TODO: Replace with actual user ID from session/context
-  const userId = "1239044529";
   React.useEffect(() => {
     const script = document.createElement('script');
     script.type = 'text/javascript';
