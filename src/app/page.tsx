@@ -84,15 +84,13 @@ export default function RobuminerLanding() {
           </div>
           {/* Nav Links */}
           <nav className="hidden md:flex gap-8 text-base font-medium">
-            <a href="#hero" className="hover:text-accent transition">Earn Robux</a>
             <a href="#faq" className="hover:text-accent transition">Help</a>
             <a href="#blogs" className="hover:text-accent transition">Blog</a>
             {user && (
               <>
-                <a href="/Earn" className="hover:text-accent transition">Earn</a>
+                <a href="/Earn" className="hover:text-accent transition">Earn Robux</a>
                 <a href="/Withdraw" className="hover:text-accent transition">Withdraw</a>
                 <a href="/referrals" className="hover:text-accent transition">Referrals</a>
-                <a href="/offers" className="hover:text-accent transition">Offers</a>
               </>
             )}
           </nav>
@@ -150,18 +148,14 @@ export default function RobuminerLanding() {
             Watch videos, play games and fill in short surveys to be rewarded with Robux — withdraw instantly!
           </p>
           <div className="flex gap-4 flex-wrap">
-            <button
-              className="bg-accent hover:bg-accent-hover text-white px-8 py-3 rounded-xl font-bold text-lg shadow transition"
-              onClick={() => {
-                if (user) {
-                  router.push("/dashboard");
-                } else {
-                  setModalOpen(true);
-                }
-              }}
-            >
-              Start Earning
-            </button>
+            {!user && (
+              <button
+                className="bg-[#23272e] hover:bg-[#181a1f] text-white px-8 py-3 rounded-2xl font-bold text-lg shadow transition"
+                onClick={() => setModalOpen(true)}
+              >
+                Start Earning
+              </button>
+            )}
           </div>
         </div>
         <div className="flex-1 flex justify-center items-center">
