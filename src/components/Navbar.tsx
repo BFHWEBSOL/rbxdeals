@@ -2,8 +2,10 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useSession } from "../context/SessionContext";
 
-export default function Navbar({ user = { username: "Player123", balance: 120 } }: { user?: { username: string, balance: number } }) {
+export default function Navbar() {
+  const { user } = useSession();
   return (
     <nav className="w-full flex items-center justify-between px-4 md:px-8 py-2 bg-[#f8f8f8] border-b border-[#e3e3e3] fixed top-0 left-0 z-30 h-14">
       {/* Left: Logo and Nav Links */}
@@ -11,12 +13,13 @@ export default function Navbar({ user = { username: "Player123", balance: 120 } 
         <Link href="/">
           <Image src="/images/rbx.svg" alt="Robuminer Logo" width={32} height={32} className="-rotate-12" />
         </Link>
-        <div className="flex items-center gap-6 text-[17px] font-medium text-[#23272e]">
-          <Link href="#">Charts</Link>
-          <Link href="#">Marketplace</Link>
-          <Link href="#">Create</Link>
-          <Link href="#">Robux</Link>
-        </div>
+        {user && (
+          <div className="flex items-center gap-6 text-[17px] font-medium text-[#23272e]">
+            <Link href="/Earn">Earn</Link>
+            <Link href="/Withdraw">Withdraw</Link>
+            <Link href="/referrals">Referrals</Link>
+          </div>
+        )}
       </div>
       {/* Center: Search Bar */}
       <div className="flex-1 flex justify-center">
