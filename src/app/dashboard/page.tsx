@@ -67,7 +67,7 @@ export default function Dashboard() {
                 onBlur={() => setTimeout(() => setDropdownOpen(false), 150)}
                 style={{ boxSizing: 'border-box' }}
               >
-                <img src={user.avatarUrl} alt="User avatar" className="w-10 h-10 rounded-lg object-cover" />
+                <img src={user.avatarUrl} alt="User avatar" className="w-10 h-10 rounded-full object-cover" />
               </div>
               {/* Dropdown menu */}
               {dropdownOpen && (

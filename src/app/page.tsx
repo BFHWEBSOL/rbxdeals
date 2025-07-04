@@ -100,7 +100,7 @@ export default function RobuminerLanding() {
                   onBlur={() => setTimeout(() => setDropdownOpen(false), 150)}
                   style={{ boxSizing: 'border-box' }}
                 >
-                  <img src={user?.avatarUrl || "/avatar-placeholder.png"} alt="User avatar" className="w-12 h-12 rounded-lg object-cover transition-transform duration-150" />
+                  <img src={user?.avatarUrl || "/avatar-placeholder.png"} alt="User avatar" className="w-12 h-12 rounded-full object-cover transition-transform duration-150" />
                 </div>
                 <div className="h-14 flex items-center gap-1 px-6 rounded-xl border font-bold text-lg min-w-[90px] justify-center bg-card-bg-light border-accent text-accent"
                   style={{ boxSizing: 'border-box' }}
