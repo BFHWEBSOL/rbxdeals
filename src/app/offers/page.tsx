@@ -11,13 +11,13 @@ export default function OffersPage() {
       <p className="mb-4 text-secondary-light dark:text-secondary-dark text-center">
         Complete offers or watch videos to get robux!
       </p>
-      <div className="w-full h-96 bg-card-light dark:bg-card-dark rounded-2xl shadow-card-light dark:shadow-card-dark flex items-center justify-center text-secondary-light dark:text-secondary-dark text-lg mb-4">
+      <div className="w-full h-[690px] bg-card-light dark:bg-card-dark rounded-2xl shadow-card-light dark:shadow-card-dark flex items-center justify-center text-secondary-light dark:text-secondary-dark text-lg mb-4">
         <iframe
           sandbox="allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation allow-popups-to-escape-sandbox"
-          src={`https://cdnnd.com/list/Fh5A?subid=${userId}`}
-          style={{ width: "100%", height: "100%", border: "none", borderRadius: "1rem" }}
+          src="https://lnksforyou.com/list/Fh5A"
+          style={{ width: "100%", height: "690px", border: "none" }}
           frameBorder="0"
-          title="CPAlead Offer Wall"
+          title="Offer Wall"
         ></iframe>
       </div>
       <Link href="/dashboard" className="px-6 py-2 rounded-2xl bg-accent text-white font-semibold hover:opacity-90 transition">Back to Dashboard</Link>
