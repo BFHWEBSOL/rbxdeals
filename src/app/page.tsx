@@ -216,7 +216,7 @@ export default function RobuminerLanding() {
           {faqs.map((faq, i) => (
             <div key={i} className="mb-2 bg-transparent">
               <button
-                className="w-full flex justify-between items-center px-6 py-5 text-left font-semibold focus:outline-none transition bg-transparent"
+                className="w-full flex justify-between items-center px-6 py-5 text-left font-semibold focus:outline-none transition bg-transparent text-[#23272e]"
                 onClick={() => setFaqOpen(faqOpen === i ? null : i)}
                 aria-expanded={faqOpen === i}
               >
@@ -224,7 +224,7 @@ export default function RobuminerLanding() {
                 <span className="ml-4 text-accent text-2xl">{faqOpen === i ? "−" : "+"}</span>
               </button>
               <div
-                className={`px-6 pb-4 text-sm text-gray-300 transition-all duration-200 ease-in-out ${faqOpen === i ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}
+                className={`px-6 pb-4 text-sm transition-all duration-200 ease-in-out text-[#23272e] ${faqOpen === i ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}
                 style={{ transitionProperty: 'max-height, opacity' }}
               >
                 {faqOpen === i && <div>{faq.a}</div>}
