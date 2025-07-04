@@ -6,7 +6,7 @@ export default function OffersPage() {
   React.useEffect(() => {
     const script = document.createElement('script');
     script.type = 'text/javascript';
-    script.src = 'https://rileymarker.com/script_include.php?id=502082';
+    script.src = 'https://epctrk.com/script_include.php?id=502082';
     script.async = true;
     document.getElementById('cpagrip-offerwall')?.appendChild(script);
     return () => {
