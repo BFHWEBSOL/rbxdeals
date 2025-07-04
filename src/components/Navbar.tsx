@@ -9,7 +9,7 @@ export default function Navbar({ user = { username: "Player123", balance: 120 } 
       {/* Left: Logo and Nav Links */}
       <div className="flex items-center gap-6 min-w-max">
         <Link href="/">
-          <Image src="/images/rbx.svg" alt="Roblox Logo" width={32} height={32} className="-rotate-12" />
+          <Image src="/images/rbx.svg" alt="Robuminer Logo" width={32} height={32} className="-rotate-12" />
         </Link>
         <div className="flex items-center gap-6 text-[17px] font-medium text-[#23272e]">
           <Link href="#">Charts</Link>

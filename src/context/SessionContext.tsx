@@ -28,7 +28,7 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
 
   // Rehydrate user from localStorage on mount
   useEffect(() => {
-    const stored = typeof window !== 'undefined' ? localStorage.getItem('rbx_user') : null;
+    const stored = typeof window !== 'undefined' ? localStorage.getItem('robuminer_user') : null;
     if (stored) {
       try {
         setUserState(JSON.parse(stored));
@@ -42,9 +42,9 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
   // Store user in localStorage whenever it changes
   useEffect(() => {
     if (user) {
-      localStorage.setItem('rbx_user', JSON.stringify(user));
+      localStorage.setItem('robuminer_user', JSON.stringify(user));
     } else {
-      localStorage.removeItem('rbx_user');
+      localStorage.removeItem('robuminer_user');
     }
   }, [user]);
 

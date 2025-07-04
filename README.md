@@ -1,4 +1,4 @@
-# RBXDeals - Roblox Rewards Platform
+# Robuminer - Roblox Rewards Platform
 
 A modern, fully responsive Roblox rewards web app that allows users to earn Robux by completing tasks.
 

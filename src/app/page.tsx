@@ -14,7 +14,7 @@ const blogs: Blog[] = [
   {
     title: "How to Get Free Robux in 2025",
     date: "2 months ago",
-    desc: "Discover the latest, safest ways to earn Robux for free on RBXDeals!",
+    desc: "Discover the latest, safest ways to earn Robux for free on Robuminer!",
   },
   {
     title: "Dress to Impress Roblox: Tips and Style",
@@ -27,7 +27,7 @@ const blogs: Blog[] = [
     desc: "Step-by-step guide to landing the viral IKEA Roblox job!",
   },
   {
-    title: "Claim Robux on RBXDeals Events",
+    title: "Claim Robux on Robuminer Events",
     date: "5 days ago",
     desc: "Don't miss out on our latest events and giveaways!",
   },
@@ -35,8 +35,8 @@ const blogs: Blog[] = [
 
 const faqs: Faq[] = [
   {
-    q: "Is RBXDeals legit?",
-    a: "Yes! RBXDeals is a trusted platform used by thousands of Roblox players. We never ask for your password and use only official payout methods.",
+    q: "Is Robuminer legit?",
+    a: "Yes! Robuminer is a trusted platform used by thousands of Roblox players. We never ask for your password and use only official payout methods.",
   },
   {
     q: "How does it work?",
@@ -56,7 +56,7 @@ const faqs: Faq[] = [
   },
 ];
 
-export default function RBXDealsLanding() {
+export default function RobuminerLanding() {
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [username, setUsername] = useState("");
@@ -80,7 +80,7 @@ export default function RBXDealsLanding() {
         <div className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-8 py-4">
           {/* Logo */}
           <div className="text-2xl font-extrabold tracking-tight select-none">
-            <span>RBX</span><span className="text-accent">Deals</span>
+            <span>Robuminer</span>
           </div>
           {/* Nav Links */}
           <nav className="hidden md:flex gap-8 text-base font-medium">
@@ -252,10 +252,10 @@ export default function RBXDealsLanding() {
           {/* Left: Logo + tagline */}
           <div className="flex-1 flex flex-col gap-4">
             <div className="text-2xl font-extrabold tracking-tight select-none">
-              <span>RBX</span><span className="text-accent">Deals</span>
+              <span>Robuminer</span>
             </div>
             <div className="max-w-xs text-sm">
-              RBXDeals makes earning free Robux fun, fast, and fair. Complete simple offers and redeem instantly.
+              Robuminer makes earning free Robux fun, fast, and fair. Complete simple offers and redeem instantly.
             </div>
             <div className="flex gap-4 mt-2">
               {/* Social icons (placeholder links) */}
@@ -300,7 +300,7 @@ export default function RBXDealsLanding() {
           </div>
         </div>
         <div className="text-xs text-center mt-8 opacity-70">
-          ©2025 RBXDeals. All rights reserved. Not affiliated with ROBLOX Corporation.
+          ©2025 Robuminer. All rights reserved. Not affiliated with ROBLOX Corporation.
         </div>
       </footer>
 
