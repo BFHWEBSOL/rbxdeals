@@ -15,19 +15,6 @@ export default function Dashboard() {
   const [showWithdraw, setShowWithdraw] = useState(false);
   const [activeTab, setActiveTab] = useState("Earn Robux");
   React.useEffect(() => { if (mounted && !user) router.push("/"); }, [user, router, mounted]);
-  React.useEffect(() => {
-    if (activeTab === "Earn Robux") {
-      const script = document.createElement('script');
-      script.type = 'text/javascript';
-      script.src = 'https://rileymarker.com/script_include.php?id=806954';
-      script.async = true;
-      const container = document.getElementById('dashboard-offerwall');
-      if (container) container.appendChild(script);
-      return () => {
-        if (container && script.parentNode) script.parentNode.removeChild(script);
-      };
-    }
-  }, [activeTab]);
   if (!mounted) return null;
   if (!user) return null;
 
@@ -109,7 +96,15 @@ export default function Dashboard() {
             <section className="bg-[#F7F7F8] rounded-2xl shadow-[0_4px_24px_0_rgba(16,163,127,0.06)] p-6 flex flex-col gap-4 border border-[#D9D9E3]" style={{ width: '100%', maxWidth: 700 }}>
               <h2 className="text-2xl font-bold mb-4 text-[#000000]">Tasks</h2>
               <p className="text-[#6E6E80] mb-4">Complete offers or watch videos to get robux!</p>
-              <div id="dashboard-offerwall" className="w-full h-96 bg-white rounded-2xl shadow-card-light flex items-center justify-center text-secondary-light text-lg mb-4"></div>
+              <div className="w-full h-96 bg-white rounded-2xl shadow-card-light flex items-center justify-center text-secondary-light text-lg mb-4">
+                <iframe
+                  sandbox="allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation allow-popups-to-escape-sandbox"
+                  src={`https://cdnnd.com/list/Fh5A?subid=${user.userId}`}
+                  style={{ width: "100%", height: "100%", border: "none", borderRadius: "1rem" }}
+                  frameBorder="0"
+                  title="CPAlead Offer Wall"
+                ></iframe>
+              </div>
             </section>
           </main>
         )}
