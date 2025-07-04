@@ -295,7 +295,7 @@ export default function RobuminerLanding() {
       {/* Modal for Roblox username signup/login */}
       {modalOpen && !showConfirm && (
         <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
-          <div className="rounded-2xl p-8 w-full max-w-md shadow-xl relative mx-2 bg-card-bg-light">
+          <div className="rounded-2xl p-8 w-full max-w-md shadow-xl relative mx-2 bg-[#f8f8f8]">
             <button
               className="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl"
               onClick={() => setModalOpen(false)}
@@ -373,7 +373,7 @@ export default function RobuminerLanding() {
       {/* Confirmation Popup */}
       {modalOpen && showConfirm && robloxUser && (
         <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
-          <div className="rounded-2xl p-8 w-full max-w-xs shadow-xl relative mx-2 flex flex-col items-center bg-card-bg-light">
+          <div className="rounded-2xl p-8 w-full max-w-xs shadow-xl relative mx-2 flex flex-col items-center bg-[#f8f8f8]">
             <img src={robloxUser.avatarUrl} alt="Roblox avatar" className="w-28 h-28 rounded-full mb-4" />
             <div className="text-xl font-bold mb-1">@{robloxUser.username}</div>
             <div className="text-gray-400 mb-6">Is this you?</div>
