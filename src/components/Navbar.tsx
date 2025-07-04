@@ -4,10 +4,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { useSession } from "../context/SessionContext";
 import { usePathname } from "next/navigation";
+import { useLoginModal } from "../app/layout";
 
 export default function Navbar() {
   const { user } = useSession();
   const pathname = usePathname();
+  const { setOpen: setLoginOpen } = useLoginModal();
 
   // Map routes to titles
   const routeTitles: { [key: string]: string } = {
@@ -35,25 +37,19 @@ export default function Navbar() {
         <div className="flex items-center gap-6 text-[17px] font-medium text-[#23272e]">
           {user ? (
             <>
-              <Link href="/Earn">Earn Robux</Link>
-              <Link href="#faq">Help</Link>
-              <Link href="#blogs">Blog</Link>
-              <Link href="/Withdraw">Withdraw</Link>
-              <Link href="/referrals">Referrals</Link>
+              <Link href="/Earn" className={pathname === "/Earn" ? "border-b-4 border-[#23272e] pb-1" : "pb-1"}>Earn Robux</Link>
+              <Link href="#faq" className={pathname === "#faq" ? "border-b-4 border-[#23272e] pb-1" : "pb-1"}>Help</Link>
+              <Link href="#blogs" className={pathname === "#blogs" ? "border-b-4 border-[#23272e] pb-1" : "pb-1"}>Blog</Link>
+              <Link href="/Withdraw" className={pathname === "/Withdraw" ? "border-b-4 border-[#23272e] pb-1" : "pb-1"}>Withdraw</Link>
+              <Link href="/referrals" className={pathname === "/referrals" ? "border-b-4 border-[#23272e] pb-1" : "pb-1"}>Referrals</Link>
             </>
           ) : (
             <>
-              <Link href="#faq">Help</Link>
-              <Link href="#blogs">Blog</Link>
+              <Link href="#faq" className={pathname === "#faq" ? "border-b-4 border-[#23272e] pb-1" : "pb-1"}>Help</Link>
+              <Link href="#blogs" className={pathname === "#blogs" ? "border-b-4 border-[#23272e] pb-1" : "pb-1"}>Blog</Link>
             </>
           )}
         </div>
-      </div>
-      {/* Center: Page Title */}
-      <div className="flex-1 flex justify-center">
-        {pageTitle && (
-          <span className="text-xl font-semibold text-[#23272e]">{pageTitle}</span>
-        )}
       </div>
       {/* Right: User, Balance, or Start Earning */}
       <div className="flex items-center gap-6 min-w-max">
@@ -73,11 +69,9 @@ export default function Navbar() {
             </div>
           </>
         ) : (
-          <Link href="/login">
-            <button className="bg-accent hover:bg-accent-hover text-white px-6 py-2 rounded-xl font-bold text-base shadow transition">
-              Start Earning
-            </button>
-          </Link>
+          <button className="bg-accent hover:bg-accent-hover text-white px-6 py-2 rounded-xl font-bold text-base shadow transition" onClick={() => setLoginOpen(true)}>
+            Start Earning
+          </button>
         )}
       </div>
     </nav>

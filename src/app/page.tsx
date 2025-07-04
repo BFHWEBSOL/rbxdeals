@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { db } from "@/lib/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useSession } from "../context/SessionContext";
+import { useLoginModal } from "./layout";
 
 const CLOUD_FUNCTION_URL = "https://us-central1-speed-camera-50eee.cloudfunctions.net/getRobloxUser";
 
@@ -71,6 +72,7 @@ export default function RobuminerLanding() {
   const { user, setUser } = useSession();
   const router = useRouter();
   const [showConfirm, setShowConfirm] = useState(false);
+  const { setOpen: setLoginOpen } = useLoginModal();
 
   return (
     <div className="min-h-screen w-full font-sans bg-main-bg-light text-primary-text-light">
@@ -89,7 +91,7 @@ export default function RobuminerLanding() {
             {!user && (
               <button
                 className="bg-[#23272e] hover:bg-[#181a1f] text-white px-8 py-3 rounded-2xl font-bold text-lg shadow transition"
-                onClick={() => setModalOpen(true)}
+                onClick={() => setLoginOpen(true)}
               >
                 Start Earning
               </button>
