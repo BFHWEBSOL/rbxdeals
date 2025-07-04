@@ -11,12 +11,17 @@ export default function Navbar() {
 
   // Map routes to titles
   const routeTitles: { [key: string]: string } = {
-    "/Earn": "Earn",
+    "/Earn": "Earn Robux",
     "/Withdraw": "Withdraw",
     "/referrals": "Referrals",
     "/dashboard": "Dashboard",
     "/offers": "Offers",
     "/": "Home",
+    "/privacy": "Privacy Policy",
+    "/login": "Login",
+    "/signup": "Sign Up",
+    "/auth": "Auth",
+    "/postback": "Postback",
   };
   const pageTitle = routeTitles[pathname] || "";
 
@@ -25,19 +30,28 @@ export default function Navbar() {
       {/* Left: Logo and Nav Links */}
       <div className="flex items-center gap-6 min-w-max">
         <Link href="/">
-          <Image src="/images/rbx.svg" alt="Robuminer Logo" width={32} height={32} className="-rotate-12" />
+          <Image src="/images/rbx.svg" alt="Robuminer Logo" width={32} height={32} className="-rotate-12 cursor-pointer" />
         </Link>
-        {user && (
-          <div className="flex items-center gap-6 text-[17px] font-medium text-[#23272e]">
-            <Link href="/Earn">Earn</Link>
-            <Link href="/Withdraw">Withdraw</Link>
-            <Link href="/referrals">Referrals</Link>
-          </div>
-        )}
+        <div className="flex items-center gap-6 text-[17px] font-medium text-[#23272e]">
+          {user ? (
+            <>
+              <Link href="/Earn">Earn Robux</Link>
+              <Link href="#faq">Help</Link>
+              <Link href="#blogs">Blog</Link>
+              <Link href="/Withdraw">Withdraw</Link>
+              <Link href="/referrals">Referrals</Link>
+            </>
+          ) : (
+            <>
+              <Link href="#faq">Help</Link>
+              <Link href="#blogs">Blog</Link>
+            </>
+          )}
+        </div>
       </div>
       {/* Center: Page Title */}
       <div className="flex-1 flex justify-center">
-        {user && pageTitle && (
+        {pageTitle && (
           <span className="text-xl font-semibold text-[#23272e]">{pageTitle}</span>
         )}
       </div>
