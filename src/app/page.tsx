@@ -75,61 +75,7 @@ export default function RobuminerLanding() {
 
   return (
     <div className="min-h-screen w-full font-sans bg-main-bg-light text-primary-text-light">
-      {/* Sticky Header */}
-      <header className="sticky top-0 z-30 w-full bg-[#f8f8f8] border-b border-border-light transition-colors">
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-8 py-4">
-          {/* Logo */}
-          <div className="text-2xl font-extrabold tracking-tight select-none">
-            <span>Robuminer</span>
-          </div>
-          {/* Nav Links */}
-          <nav className="hidden md:flex gap-8 text-base font-medium">
-            <a href="#faq" className="hover:text-accent transition">Help</a>
-            <a href="#blogs" className="hover:text-accent transition">Blog</a>
-            {user && (
-              <>
-                <a href="/Earn" className="hover:text-accent transition">Earn Robux</a>
-                <a href="/Withdraw" className="hover:text-accent transition">Withdraw</a>
-                <a href="/referrals" className="hover:text-accent transition">Referrals</a>
-              </>
-            )}
-          </nav>
-          {/* Right Controls */}
-          <div className="flex items-center gap-4">
-            {/* User Avatar + Balance */}
-            {user ? (
-              <div className="flex items-center gap-3 relative h-14">
-                <div
-                  className={`h-14 w-14 flex items-center justify-center rounded-xl border-2 cursor-pointer transition-all duration-150 border-accent bg-[#f8f8f8] hover:scale-110 ${dropdownOpen ? "border-accent scale-105" : ""}`}
-                  onClick={() => setDropdownOpen((open) => !open)}
-                  tabIndex={0}
-                  onBlur={() => setTimeout(() => setDropdownOpen(false), 150)}
-                  style={{ boxSizing: 'border-box' }}
-                >
-                  <img src={user?.avatarUrl || "/avatar-placeholder.png"} alt="User avatar" className="w-12 h-12 rounded-full object-cover transition-transform duration-150" />
-                </div>
-                <div className="h-14 flex items-center gap-1 px-6 rounded-xl border font-bold text-lg min-w-[90px] justify-center bg-card-bg-light border-accent text-accent"
-                  style={{ boxSizing: 'border-box' }}
-                >
-                  <span>{typeof user?.robuxBalance === 'number' ? user.robuxBalance : '0.5'}</span>
-                  <svg width="20" height="20" fill="none" stroke="#23272e" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><text x="12" y="16" textAnchor="middle" fontSize="10" fill="#23272e">R$</text></svg>
-                </div>
-                {/* Dropdown menu */}
-                {dropdownOpen && (
-                  <div className="absolute top-14 left-0 z-50 w-48 rounded-xl shadow-lg bg-[#f8f8f8] text-primary-text-light py-2 flex flex-col gap-1 animate-fade-in"
-                    tabIndex={-1}
-                  >
-                    <button className="text-left px-4 py-2 hover:bg-hover-dark rounded-lg transition" onClick={() => setDropdownOpen(false)}>Profile</button>
-                    <button className="text-left px-4 py-2 hover:bg-hover-dark rounded-lg transition" onClick={() => setDropdownOpen(false)}>Offer history</button>
-                    <button className="text-left px-4 py-2 hover:bg-hover-dark rounded-lg transition" onClick={() => setDropdownOpen(false)}>Withdraw history</button>
-                    <button className="text-left px-4 py-2 hover:bg-hover-dark rounded-lg transition text-red-400" onClick={() => { setUser(null); setDropdownOpen(false); }}>Sign out</button>
-                  </div>
-                )}
-              </div>
-            ) : null}
-          </div>
-        </div>
-      </header>
+      {/* Removed page-level header/nav here. Only use global Navbar. */}
 
       {/* Hero Section */}
       <section id="hero" className="w-full flex flex-col md:flex-row items-center justify-between max-w-7xl mx-auto px-4 md:px-8 py-16 gap-8">
