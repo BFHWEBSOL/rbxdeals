@@ -20,9 +20,14 @@ export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
 
-    const subid = searchParams.get('subid');
-    const virtual_currency = searchParams.get('virtual_currency');
+    // Accept both 'cid' and 'subid' as user ID
+    const subid = searchParams.get('subid') || searchParams.get('cid');
+    // Accept both 'virtual_currency' and 'payout' as credited amount
+    const creditedAmount = searchParams.get('virtual_currency') || searchParams.get('payout');
     const password = searchParams.get('password');
+    const offer_id = searchParams.get('offer_id');
+    const txid = searchParams.get('txid');
+    const status = searchParams.get('status');
 
     // Security: Check password
     if (password !== 'P@55w0rdForPostback2025') {
@@ -33,9 +38,9 @@ export async function GET(request) {
     }
 
     // Validate required parameters
-    if (!subid || !virtual_currency || isNaN(Number(virtual_currency))) {
+    if (!subid || !creditedAmount || isNaN(Number(creditedAmount))) {
       return NextResponse.json(
-        { error: 'Missing or invalid subid or virtual_currency' },
+        { error: 'Missing or invalid subid/cid or payout/virtual_currency' },
         { status: 400 }
       );
     }
@@ -45,10 +50,17 @@ export async function GET(request) {
 
     // Atomically increment robuxBalance
     await userRef.update({
-      robuxBalance: FieldValue.increment(Number(virtual_currency)),
+      robuxBalance: FieldValue.increment(Number(creditedAmount)),
     });
 
-    return NextResponse.json({ success: true, credited: Number(virtual_currency) });
+    return NextResponse.json({
+      success: true,
+      credited: Number(creditedAmount),
+      user: subid,
+      offer_id,
+      txid,
+      status
+    });
   } catch (error) {
     // Handle user not found or other errors
     if (error.code === 5) { // Firestore 'not-found'
