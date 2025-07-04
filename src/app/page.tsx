@@ -87,6 +87,14 @@ export default function RobuminerLanding() {
             <a href="#hero" className="hover:text-accent transition">Earn Robux</a>
             <a href="#faq" className="hover:text-accent transition">Help</a>
             <a href="#blogs" className="hover:text-accent transition">Blog</a>
+            {user && (
+              <>
+                <a href="/Earn" className="hover:text-accent transition">Earn</a>
+                <a href="/Withdraw" className="hover:text-accent transition">Withdraw</a>
+                <a href="/referrals" className="hover:text-accent transition">Referrals</a>
+                <a href="/offers" className="hover:text-accent transition">Offers</a>
+              </>
+            )}
           </nav>
           {/* Right Controls */}
           <div className="flex items-center gap-4">
@@ -106,11 +114,7 @@ export default function RobuminerLanding() {
                   style={{ boxSizing: 'border-box' }}
                 >
                   <span>{typeof user?.robuxBalance === 'number' ? user.robuxBalance : '0.5'}</span>
-                  <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10" stroke="#10a37f" strokeWidth="2"/>
-                    <rect x="8" y="8" width="8" height="8" rx="2" fill="#10a37f"/>
-                    <text x="12" y="16" textAnchor="middle" fontSize="10" fill="white" fontWeight="bold">R$</text>
-                  </svg>
+                  <svg width="20" height="20" fill="none" stroke="#23272e" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><text x="12" y="16" textAnchor="middle" fontSize="10" fill="#23272e">R$</text></svg>
                 </div>
                 {/* Dropdown menu */}
                 {dropdownOpen && (
