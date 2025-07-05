@@ -1,13 +1,23 @@
 "use client";
 import React from "react";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useSession } from "../../context/SessionContext";
 
 export default function ReferralsPage() {
+  const { user } = useSession();
+  const router = useRouter();
   const [copied, setCopied] = useState(false);
   const referralCode = "abc123";
   const referralLink = `https://robuxrewards.com/?ref=${referralCode}`;
   const totalReferrals = 8;
   const robuxFromReferrals = 40;
+
+  React.useEffect(() => {
+    if (!user) router.push("/");
+  }, [user, router]);
+
+  if (!user) return null;
 
   return (
     <div className="w-full max-w-2xl mx-auto py-12 flex flex-col gap-8 items-center">

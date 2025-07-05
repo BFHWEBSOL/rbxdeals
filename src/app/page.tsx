@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import { db } from "@/lib/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useSession } from "../context/SessionContext";
-import { useLoginModal } from "./layout";
 
 const CLOUD_FUNCTION_URL = "https://us-central1-speed-camera-50eee.cloudfunctions.net/getRobloxUser";
 
@@ -72,11 +71,70 @@ export default function RobuminerLanding() {
   const { user, setUser } = useSession();
   const router = useRouter();
   const [showConfirm, setShowConfirm] = useState(false);
-  const { setOpen: setLoginOpen } = useLoginModal();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   return (
     <div className="min-h-screen w-full font-sans bg-main-bg-light text-primary-text-light">
-      {/* Removed page-level header/nav here. Only use global Navbar. */}
+      {/* Sticky Header */}
+      <header className="sticky top-0 z-30 w-full bg-[#f8f8f8] border-b border-border-light transition-colors">
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-8 py-4">
+          {/* Logo */}
+          <div className="text-2xl font-extrabold tracking-tight select-none">
+            <span>Robuminer</span>
+          </div>
+          {/* Nav Links */}
+          <nav className="hidden md:flex gap-8 text-base font-medium">
+            <a href="#hero" className="hover:text-accent transition">Earn Robux</a>
+            <a href="#faq" className="hover:text-accent transition">Help</a>
+            <a href="#blogs" className="hover:text-accent transition">Blog</a>
+          </nav>
+          {/* Right Controls */}
+          <div className="flex items-center gap-4">
+            {/* User Avatar + Balance */}
+            {user ? (
+              <div className="flex items-center gap-3 relative h-14">
+                <div
+                  className={`h-14 w-14 flex items-center justify-center rounded-xl border-2 cursor-pointer transition-all duration-150 border-accent bg-[#f8f8f8] hover:scale-110 ${dropdownOpen ? "border-accent scale-105" : ""}`}
+                  onClick={() => setDropdownOpen((open) => !open)}
+                  tabIndex={0}
+                  onBlur={() => setTimeout(() => setDropdownOpen(false), 150)}
+                  style={{ boxSizing: 'border-box' }}
+                >
+                  <img src={user?.avatarUrl || "/avatar-placeholder.png"} alt="User avatar" className="w-12 h-12 rounded-full object-cover transition-transform duration-150" />
+                </div>
+                <div className="h-14 flex items-center gap-1 px-6 rounded-xl border font-bold text-lg min-w-[90px] justify-center bg-card-bg-light border-accent text-accent"
+                  style={{ boxSizing: 'border-box' }}
+                >
+                  <span>{typeof user?.robuxBalance === 'number' ? user.robuxBalance : '0.5'}</span>
+                  <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10" stroke="#10a37f" strokeWidth="2"/>
+                    <rect x="8" y="8" width="8" height="8" rx="2" fill="#10a37f"/>
+                    <text x="12" y="16" textAnchor="middle" fontSize="10" fill="white" fontWeight="bold">R$</text>
+                  </svg>
+                </div>
+                {/* Dropdown menu */}
+                {dropdownOpen && (
+                  <div className="absolute top-14 left-0 z-50 w-48 rounded-xl shadow-lg bg-[#f8f8f8] text-primary-text-light py-2 flex flex-col gap-1 animate-fade-in"
+                    tabIndex={-1}
+                  >
+                    <button className="text-left px-4 py-2 hover:bg-hover-dark rounded-lg transition" onClick={() => setDropdownOpen(false)}>Profile</button>
+                    <button className="text-left px-4 py-2 hover:bg-hover-dark rounded-lg transition" onClick={() => setDropdownOpen(false)}>Offer history</button>
+                    <button className="text-left px-4 py-2 hover:bg-hover-dark rounded-lg transition" onClick={() => setDropdownOpen(false)}>Withdraw history</button>
+                    <button className="text-left px-4 py-2 hover:bg-hover-dark rounded-lg transition text-red-400" onClick={() => { setUser(null); setDropdownOpen(false); }}>Sign out</button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <button
+                className="bg-accent hover:bg-accent-hover text-white px-6 py-2 rounded-xl font-bold text-base shadow transition"
+                onClick={() => setModalOpen(true)}
+              >
+                Sign In
+              </button>
+            )}
+          </div>
+        </div>
+      </header>
 
       {/* Hero Section */}
       <section id="hero" className="w-full flex flex-col md:flex-row items-center justify-between max-w-7xl mx-auto px-4 md:px-8 py-16 gap-8">
@@ -88,14 +146,18 @@ export default function RobuminerLanding() {
             Watch videos, play games and fill in short surveys to be rewarded with Robux — withdraw instantly!
           </p>
           <div className="flex gap-4 flex-wrap">
-            {!user && (
-              <button
-                className="bg-[#23272e] hover:bg-[#181a1f] text-white px-8 py-3 rounded-2xl font-bold text-lg shadow transition"
-                onClick={() => setLoginOpen(true)}
-              >
-                Start Earning
-              </button>
-            )}
+            <button
+              className="bg-accent hover:bg-accent-hover text-white px-8 py-3 rounded-xl font-bold text-lg shadow transition"
+              onClick={() => {
+                if (user) {
+                  router.push("/dashboard");
+                } else {
+                  setModalOpen(true);
+                }
+              }}
+            >
+              Start Earning
+            </button>
           </div>
         </div>
         <div className="flex-1 flex justify-center items-center">
