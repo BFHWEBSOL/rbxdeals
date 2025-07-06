@@ -14,7 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-screen font-sans transition-colors">
         <SessionProvider>
           <Navbar />
-          <main className="flex-1 w-full pt-20">
+          <main className="flex-1 w-full">
             {children}
           </main>
         </SessionProvider>
