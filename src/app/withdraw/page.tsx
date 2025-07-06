@@ -71,7 +71,7 @@ export default function WithdrawPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Content */}
-      <div className="max-w-4xl mx-auto px-4 py-8">
+      <div className="max-w-4xl mx-auto px-4 py-4">
         {/* Balance Card */}
         <div className="bg-white rounded-xl shadow-sm border p-6 mb-8">
           <div className="flex items-center justify-between">
