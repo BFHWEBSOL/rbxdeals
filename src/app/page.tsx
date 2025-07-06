@@ -3,8 +3,6 @@ import React, { useState } from "react";
 import { useSession } from "../context/SessionContext";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../lib/firebase";
-import Login from "../components/Login";
-import FAQAccordion from "../components/FAQAccordion";
 
 const CLOUD_FUNCTION_URL = "https://us-central1-speed-camera-50eee.cloudfunctions.net/getRobloxUser";
 
