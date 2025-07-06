@@ -118,7 +118,7 @@ export default function Navbar() {
                         document.cookie.split(';').forEach(function(c) {
                           document.cookie = c.replace(/^ +/, '').replace(/=.*/, '=;expires=' + new Date(0).toUTCString() + ';path=/');
                         });
-                      } catch (e) {}
+                      } catch {/* ignore */}
                       window.location.replace('/');
                     }}
                   >
