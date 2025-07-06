@@ -101,9 +101,9 @@ export default function Navbar() {
                 onClick={() => setAvatarMenuOpen((open) => !open)}
               />
               {avatarMenuOpen && (
-                <div className="absolute left-0 top-12 z-50 w-40 bg-white border border-gray-200 rounded-xl shadow-lg py-2 flex flex-col animate-fade-in">
+                <div className="absolute left-1/2 -translate-x-1/2 top-14 z-50 w-64 bg-white border border-gray-100 rounded-2xl shadow-xl py-6 flex flex-col items-start animate-fade-in" style={{boxShadow: '0 4px 24px 0 rgba(16,24,40,0.08)'}}>
                   <button
-                    className="text-left px-4 py-2 hover:bg-gray-100 rounded-lg transition text-red-500 font-semibold"
+                    className="w-full text-left px-8 py-3 text-lg text-[#444950] hover:bg-gray-100 rounded-xl transition font-medium"
                     onClick={() => { setUser(null); setAvatarMenuOpen(false); }}
                   >
                     Logout
