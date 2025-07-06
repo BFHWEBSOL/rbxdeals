@@ -70,14 +70,6 @@ export default function WithdrawPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 py-6">
-          <h1 className="text-3xl font-bold text-gray-900">Withdraw Robux</h1>
-          <p className="text-gray-600 mt-2">Cash out your earned Robux</p>
-        </div>
-      </div>
-
       {/* Content */}
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Balance Card */}
