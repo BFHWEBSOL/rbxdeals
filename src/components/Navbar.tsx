@@ -3,6 +3,7 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession } from "../context/SessionContext";
+import Image from "next/image";
 
 // Define a type for navigation links
 interface NavLink {
@@ -83,11 +84,7 @@ export default function Navbar() {
               <span className="font-semibold text-base text-[#23272e]">{user.username}</span>
               <div className="flex items-center gap-1 bg-white px-3 py-1 rounded-2xl border border-gray-200">
                 <span className="font-bold text-lg text-[#10a37f]">{typeof user.robuxBalance === "number" ? user.robuxBalance : "0"}</span>
-                <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="10" stroke="#10a37f" strokeWidth="2"/>
-                  <rect x="8" y="8" width="8" height="8" rx="2" fill="#10a37f"/>
-                  <text x="12" y="16" textAnchor="middle" fontSize="10" fill="white" fontWeight="bold">R$</text>
-                </svg>
+                <Image src="/images/rbx.svg" alt="Robux Icon" width={24} height={24} />
               </div>
             </>
           ) : (
