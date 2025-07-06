@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useSession } from "../context/SessionContext";
 import Image from "next/image";
 
@@ -28,6 +28,7 @@ export default function Navbar() {
   const { user, setUser } = useSession();
   const [avatarMenuOpen, setAvatarMenuOpen] = useState(false);
   const avatarRef = useRef<HTMLImageElement>(null);
+  const router = useRouter();
 
   // Close menu when clicking outside
   useEffect(() => {
@@ -105,9 +106,9 @@ export default function Navbar() {
                   {/* Triangle */}
                   <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white rotate-45 shadow-sm border-l border-t border-gray-100" style={{zIndex:2}} />
                   <button
-                    className="w-full text-left px-8 py-4 text-lg text-[#444950] hover:bg-gray-200 rounded-b-2xl transition font-medium"
+                    className="w-full text-left px-8 py-4 text-lg text-[#444950] bg-white hover:bg-gray-200 rounded-b-2xl transition font-medium"
                     style={{borderTop: '1px solid #e5e7eb'}}
-                    onClick={() => { setUser(null); setAvatarMenuOpen(false); }}
+                    onClick={() => { setUser(null); setAvatarMenuOpen(false); router.push('/login'); }}
                   >
                     Logout
                   </button>
