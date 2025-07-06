@@ -67,7 +67,7 @@ export default function RobuminerLanding() {
     displayName: string;
     avatarUrl: string;
   }>(null);
-  const { user, setUser } = useSession();
+  const session = useSession();
   const [showConfirm, setShowConfirm] = useState(false);
 
   return (
@@ -252,7 +252,7 @@ export default function RobuminerLanding() {
                   if (userSnap.exists()) {
                     // User exists: set user and close modal immediately
                     const userDoc = userSnap.data();
-                    setUser({
+                    session.setUser({
                       userId: String(userDoc.userId),
                       username: userDoc.username,
                       avatarUrl: userDoc.avatarUrl,
@@ -310,7 +310,7 @@ export default function RobuminerLanding() {
               <button
                 className="flex-1 rounded-xl px-0 py-3 bg-accent text-white font-bold text-lg border-2 border-accent hover:bg-accent-hover transition focus:outline-none"
                 onClick={() => {
-                  setUser({
+                  session.setUser({
                     userId: String(robloxUser.userId),
                     username: robloxUser.username,
                     avatarUrl: robloxUser.avatarUrl,
