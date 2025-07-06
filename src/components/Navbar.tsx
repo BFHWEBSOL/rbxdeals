@@ -106,9 +106,15 @@ export default function Navbar() {
                   {/* Triangle */}
                   <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white rotate-45 shadow-sm border-l border-t border-gray-100" style={{zIndex:2}} />
                   <button
+                    type="button"
                     className="w-full text-left px-8 py-4 text-lg text-[#444950] bg-white hover:bg-gray-200 rounded-b-2xl transition font-medium"
                     style={{borderTop: '1px solid #e5e7eb'}}
-                    onClick={() => { setUser(null); setAvatarMenuOpen(false); router.push('/login'); }}
+                    onClick={() => {
+                      setUser(null);
+                      setAvatarMenuOpen(false);
+                      console.log('User logged out, redirecting to /login');
+                      router.push('/login');
+                    }}
                   >
                     Logout
                   </button>
