@@ -56,8 +56,11 @@ export default function Navbar() {
     <header className="w-full bg-[#f8f8f8] border-b border-[#e3e3e3] sticky top-0 z-30">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-8 py-4">
         {/* Logo */}
-        <div className="text-2xl font-extrabold tracking-tight select-none">
-          <Link href="/">Robuminer</Link>
+        <div className="nav-brand flex items-center gap-2">
+          <Link href="/">
+            <img src="/images/rbx.svg" alt="Robuminer" className="logo w-10 h-10" />
+          </Link>
+          <span className="brand-text text-xl font-bold tracking-tight text-[#121314] select-none" style={{fontFamily: 'Inter, sans-serif'}}>Robuminer</span>
         </div>
         {/* Nav Links */}
         <nav className="flex gap-8 text-base font-medium">
