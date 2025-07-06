@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession } from "../context/SessionContext";
@@ -25,7 +25,24 @@ const userLinks: NavLink[] = [
 
 export default function Navbar() {
   const pathname = usePathname();
-  const { user } = useSession();
+  const { user, setUser } = useSession();
+  const [avatarMenuOpen, setAvatarMenuOpen] = useState(false);
+  const avatarRef = useRef<HTMLImageElement>(null);
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (avatarRef.current && !avatarRef.current.contains(e.target as Node)) {
+        setAvatarMenuOpen(false);
+      }
+    }
+    if (avatarMenuOpen) {
+      document.addEventListener("mousedown", handleClick);
+    } else {
+      document.removeEventListener("mousedown", handleClick);
+    }
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [avatarMenuOpen]);
 
   // Helper to check if a link is active
   const isActive = (link: NavLink) => {
@@ -73,28 +90,29 @@ export default function Navbar() {
             ))}
         </nav>
         {/* User Controls */}
-        <div className="flex items-center gap-4">
-          {user ? (
-            <>
-              <img
-                src={user.avatarUrl || "/avatar-placeholder.png"}
-                alt="User avatar"
-                className="w-10 h-10 rounded-full object-cover border border-gray-300"
-              />
-              <span className="font-semibold text-base text-[#23272e]">{user.username}</span>
-              <div className="flex items-center gap-1 bg-white px-3 py-1 rounded-2xl border border-gray-200">
-                <span className="font-bold text-lg text-[#10a37f]">{typeof user.robuxBalance === "number" ? user.robuxBalance : "0"}</span>
-                <Image src="/images/rbx.svg" alt="Robux Icon" width={24} height={24} />
-              </div>
-            </>
-          ) : (
-            <Link
-              href="/login"
-              className="bg-accent hover:bg-accent-hover text-white px-6 py-2 rounded-xl font-bold text-base shadow transition"
-            >
-              Sign In
-            </Link>
+        <div className="flex items-center gap-4 relative">
+          <img
+            ref={avatarRef}
+            src={user.avatarUrl || "/avatar-placeholder.png"}
+            alt="User avatar"
+            className="w-10 h-10 rounded-full object-cover border border-gray-300 cursor-pointer"
+            onClick={() => setAvatarMenuOpen((open) => !open)}
+          />
+          {avatarMenuOpen && (
+            <div className="absolute left-0 top-12 z-50 w-40 bg-white border border-gray-200 rounded-xl shadow-lg py-2 flex flex-col animate-fade-in">
+              <button
+                className="text-left px-4 py-2 hover:bg-gray-100 rounded-lg transition text-red-500 font-semibold"
+                onClick={() => { setUser(null); setAvatarMenuOpen(false); }}
+              >
+                Logout
+              </button>
+            </div>
           )}
+          <span className="font-semibold text-base text-[#23272e]">{user.username}</span>
+          <div className="flex items-center gap-1 bg-white px-3 py-1 rounded-2xl border border-gray-200">
+            <span className="font-bold text-lg text-[#10a37f]">{typeof user.robuxBalance === "number" ? user.robuxBalance : "0"}</span>
+            <Image src="/images/rbx.svg" alt="Robux Icon" width={24} height={24} />
+          </div>
         </div>
       </div>
     </header>
