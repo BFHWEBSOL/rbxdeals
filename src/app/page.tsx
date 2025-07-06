@@ -84,18 +84,27 @@ export default function RobuminerLanding() {
             Watch videos, play games and fill in short surveys to be rewarded with Robux — withdraw instantly!
           </p>
           <div className="flex gap-4 flex-wrap">
-            <button
-              className="bg-accent hover:bg-accent-hover text-white px-8 py-3 rounded-xl font-bold text-lg shadow transition"
-              onClick={() => {
-                if (user) {
-                  router.push("/dashboard");
-                } else {
-                  setModalOpen(true);
-                }
-              }}
-            >
-              Start Earning
-            </button>
+            {!user ? (
+              <button
+                className="bg-accent hover:bg-accent-hover text-white px-8 py-3 rounded-xl font-bold text-lg shadow transition"
+                onClick={() => setModalOpen(true)}
+              >
+                Get Started
+              </button>
+            ) : (
+              <div className="flex items-center gap-4">
+                <img
+                  src={user.avatarUrl || "/avatar-placeholder.png"}
+                  alt="User avatar"
+                  className="w-12 h-12 rounded-full object-cover border border-gray-300"
+                />
+                <span className="font-semibold text-lg text-[#23272e]">{user.username}</span>
+                <div className="flex items-center gap-1 bg-white px-3 py-1 rounded-2xl border border-gray-200">
+                  <span className="font-bold text-lg text-[#10a37f]">{typeof user.robuxBalance === "number" ? user.robuxBalance : "0"}</span>
+                  <img src="/images/rbx.svg" alt="Robux Icon" width={24} height={24} />
+                </div>
+              </div>
+            )}
           </div>
         </div>
         <div className="flex-1 flex justify-center items-center">
