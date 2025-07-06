@@ -135,6 +135,26 @@ export default function Navbar() {
                 <span className="font-bold text-lg text-[#10a37f]">{typeof user.robuxBalance === "number" ? user.robuxBalance : "0"}</span>
                 <Image src="/images/rbx.svg" alt="Robux Icon" width={24} height={24} />
               </div>
+              {/* Direct Logout Button for Debugging */}
+              <button
+                type="button"
+                className="ml-2 px-4 py-2 rounded bg-red-500 text-white font-semibold hover:bg-red-600 transition"
+                onClick={() => {
+                  alert('Logout clicked!');
+                  setUser(null);
+                  setAvatarMenuOpen(false);
+                  try {
+                    localStorage.clear();
+                    sessionStorage.clear();
+                    document.cookie.split(';').forEach(function(c) {
+                      document.cookie = c.replace(/^ +/, '').replace(/=.*/, '=;expires=' + new Date(0).toUTCString() + ';path=/');
+                    });
+                  } catch {/* ignore */}
+                  window.location.replace('/');
+                }}
+              >
+                Logout
+              </button>
             </>
           ) : (
             <Link
