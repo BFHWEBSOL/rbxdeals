@@ -41,7 +41,9 @@ export default function AuthPage() {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) router.push('/dashboard');
+      if (user) {
+        // No redirect
+      }
     });
     return () => unsubscribe();
   }, [router]);

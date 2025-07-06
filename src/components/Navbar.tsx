@@ -112,8 +112,7 @@ export default function Navbar() {
                     onClick={() => {
                       setUser(null);
                       setAvatarMenuOpen(false);
-                      console.log('User logged out, redirecting to /login');
-                      router.push('/login');
+                      window.location.reload();
                     }}
                   >
                     Logout

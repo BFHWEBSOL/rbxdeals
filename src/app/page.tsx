@@ -279,7 +279,6 @@ export default function RobuminerLanding() {
                     });
                     setModalOpen(false);
                     setShowConfirm(false);
-                    router.push("/dashboard");
                   } else {
                     // User does not exist: show confirmation
                     setRobloxUser(data);
@@ -338,7 +337,6 @@ export default function RobuminerLanding() {
                   });
                   setShowConfirm(false);
                   setModalOpen(false);
-                  router.push("/dashboard");
                 }}
               >
                 Yes

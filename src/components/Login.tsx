@@ -39,7 +39,6 @@ export default function Login() {
           redemptions: userDoc.redemptions || [],
           createdAt: userDoc.createdAt,
         });
-        router.push("/dashboard");
       } else {
         setUser({
           userId: String(data.userId),
@@ -49,7 +48,6 @@ export default function Login() {
           redemptions: [],
           createdAt: null,
         });
-        router.push("/dashboard");
       }
     } catch (err: unknown) {
       if (err instanceof Error) {
