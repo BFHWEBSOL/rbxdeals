@@ -4,13 +4,20 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession } from "../context/SessionContext";
 
-const navLinks = [
+// Define a type for navigation links
+interface NavLink {
+  href: string;
+  label: string;
+  match: RegExp;
+}
+
+const navLinks: NavLink[] = [
   { href: "/", label: "Earn Robux", match: /^\/$/ },
   { href: "/#faq", label: "Help", match: /#faq/ },
   { href: "/#blogs", label: "Blog", match: /#blogs/ },
 ];
 
-const userLinks = [
+const userLinks: NavLink[] = [
   { href: "/offers", label: "Tasks", match: /^\/offers/ },
   { href: "/withdraw", label: "Withdraw", match: /^\/withdraw/ },
   { href: "/referrals", label: "Referrals", match: /^\/referrals/ },
@@ -21,7 +28,7 @@ export default function Navbar() {
   const { user } = useSession();
 
   // Helper to check if a link is active
-  const isActive = (link) => {
+  const isActive = (link: NavLink) => {
     if (link.match instanceof RegExp) {
       return link.match.test(pathname);
     }
