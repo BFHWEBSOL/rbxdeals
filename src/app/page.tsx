@@ -87,6 +87,13 @@ export default function RobuminerLanding() {
             <a href="#hero" className="hover:text-accent transition">Earn Robux</a>
             <a href="#faq" className="hover:text-accent transition">Help</a>
             <a href="#blogs" className="hover:text-accent transition">Blog</a>
+            {user && (
+              <>
+                <a href="/offers" className="hover:text-accent transition">Tasks</a>
+                <a href="/withdraw" className="hover:text-accent transition">Withdraw</a>
+                <a href="/referrals" className="hover:text-accent transition">Referrals</a>
+              </>
+            )}
           </nav>
           {/* Right Controls */}
           <div className="flex items-center gap-4">
@@ -117,6 +124,10 @@ export default function RobuminerLanding() {
                   <div className="absolute top-14 left-0 z-50 w-48 rounded-xl shadow-lg bg-[#f8f8f8] text-primary-text-light py-2 flex flex-col gap-1 animate-fade-in"
                     tabIndex={-1}
                   >
+                    <a href="/offers" className="text-left px-4 py-2 hover:bg-hover-dark rounded-lg transition" onClick={() => setDropdownOpen(false)}>Tasks</a>
+                    <a href="/withdraw" className="text-left px-4 py-2 hover:bg-hover-dark rounded-lg transition" onClick={() => setDropdownOpen(false)}>Withdraw</a>
+                    <a href="/referrals" className="text-left px-4 py-2 hover:bg-hover-dark rounded-lg transition" onClick={() => setDropdownOpen(false)}>Referrals</a>
+                    <hr className="my-1 border-gray-300" />
                     <button className="text-left px-4 py-2 hover:bg-hover-dark rounded-lg transition" onClick={() => setDropdownOpen(false)}>Profile</button>
                     <button className="text-left px-4 py-2 hover:bg-hover-dark rounded-lg transition" onClick={() => setDropdownOpen(false)}>Offer history</button>
                     <button className="text-left px-4 py-2 hover:bg-hover-dark rounded-lg transition" onClick={() => setDropdownOpen(false)}>Withdraw history</button>
