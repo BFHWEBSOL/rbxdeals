@@ -91,28 +91,39 @@ export default function Navbar() {
         </nav>
         {/* User Controls */}
         <div className="flex items-center gap-4 relative">
-          <img
-            ref={avatarRef}
-            src={user.avatarUrl || "/avatar-placeholder.png"}
-            alt="User avatar"
-            className="w-10 h-10 rounded-full object-cover border border-gray-300 cursor-pointer"
-            onClick={() => setAvatarMenuOpen((open) => !open)}
-          />
-          {avatarMenuOpen && (
-            <div className="absolute left-0 top-12 z-50 w-40 bg-white border border-gray-200 rounded-xl shadow-lg py-2 flex flex-col animate-fade-in">
-              <button
-                className="text-left px-4 py-2 hover:bg-gray-100 rounded-lg transition text-red-500 font-semibold"
-                onClick={() => { setUser(null); setAvatarMenuOpen(false); }}
-              >
-                Logout
-              </button>
-            </div>
+          {user ? (
+            <>
+              <img
+                ref={avatarRef}
+                src={user.avatarUrl || "/avatar-placeholder.png"}
+                alt="User avatar"
+                className="w-10 h-10 rounded-full object-cover border border-gray-300 cursor-pointer"
+                onClick={() => setAvatarMenuOpen((open) => !open)}
+              />
+              {avatarMenuOpen && (
+                <div className="absolute left-0 top-12 z-50 w-40 bg-white border border-gray-200 rounded-xl shadow-lg py-2 flex flex-col animate-fade-in">
+                  <button
+                    className="text-left px-4 py-2 hover:bg-gray-100 rounded-lg transition text-red-500 font-semibold"
+                    onClick={() => { setUser(null); setAvatarMenuOpen(false); }}
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+              <span className="font-semibold text-base text-[#23272e]">{user.username}</span>
+              <div className="flex items-center gap-1 bg-white px-3 py-1 rounded-2xl border border-gray-200">
+                <span className="font-bold text-lg text-[#10a37f]">{typeof user.robuxBalance === "number" ? user.robuxBalance : "0"}</span>
+                <Image src="/images/rbx.svg" alt="Robux Icon" width={24} height={24} />
+              </div>
+            </>
+          ) : (
+            <Link
+              href="/login"
+              className="bg-accent hover:bg-accent-hover text-white px-6 py-2 rounded-xl font-bold text-base shadow transition"
+            >
+              Sign In
+            </Link>
           )}
-          <span className="font-semibold text-base text-[#23272e]">{user.username}</span>
-          <div className="flex items-center gap-1 bg-white px-3 py-1 rounded-2xl border border-gray-200">
-            <span className="font-bold text-lg text-[#10a37f]">{typeof user.robuxBalance === "number" ? user.robuxBalance : "0"}</span>
-            <Image src="/images/rbx.svg" alt="Robux Icon" width={24} height={24} />
-          </div>
         </div>
       </div>
     </header>
