@@ -109,11 +109,17 @@ export default function Navbar() {
                     className="w-full text-left px-8 py-4 text-lg text-[#444950] bg-white hover:bg-gray-200 rounded-b-2xl transition font-medium"
                     style={{borderTop: '1px solid #e5e7eb'}}
                     onClick={() => {
-                      console.log('Logout clicked');
+                      // Bulletproof logout: clear all storage and cookies
                       setUser(null);
                       setAvatarMenuOpen(false);
-                      localStorage.removeItem('robuminer_user');
-                      window.location.href = '/';
+                      try {
+                        localStorage.clear();
+                        sessionStorage.clear();
+                        document.cookie.split(';').forEach(function(c) {
+                          document.cookie = c.replace(/^ +/, '').replace(/=.*/, '=;expires=' + new Date(0).toUTCString() + ';path=/');
+                        });
+                      } catch (e) {}
+                      window.location.replace('/');
                     }}
                   >
                     Logout
