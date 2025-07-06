@@ -112,6 +112,7 @@ export default function Navbar() {
                     className="w-full text-left px-8 py-4 text-lg text-[#444950] bg-white hover:bg-gray-200 rounded-b-2xl transition font-medium"
                     style={{borderTop: '1px solid #e5e7eb'}}
                     onClick={() => {
+                      alert('Logout clicked!');
                       // Bulletproof logout: clear all storage and cookies
                       setUser(null);
                       setAvatarMenuOpen(false);
