@@ -109,9 +109,11 @@ export default function Navbar() {
                     className="w-full text-left px-8 py-4 text-lg text-[#444950] bg-white hover:bg-gray-200 rounded-b-2xl transition font-medium"
                     style={{borderTop: '1px solid #e5e7eb'}}
                     onClick={() => {
+                      console.log('Logout clicked');
                       setUser(null);
                       setAvatarMenuOpen(false);
-                      window.location.reload();
+                      localStorage.removeItem('robuminer_user');
+                      window.location.href = '/';
                     }}
                   >
                     Logout
