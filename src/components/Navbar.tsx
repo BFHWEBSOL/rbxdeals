@@ -75,15 +75,14 @@ export default function Navbar() {
         <div className="flex items-center gap-4">
           {user ? (
             <>
-              <div className="h-14 w-14 flex items-center justify-center rounded-xl border-2 border-accent bg-[#f8f8f8]">
-                <img
-                  src={user.avatarUrl || "/avatar-placeholder.png"}
-                  alt="User avatar"
-                  className="w-12 h-12 rounded-full object-cover"
-                />
-              </div>
-              <div className="h-14 flex items-center gap-1 px-6 rounded-xl border font-bold text-lg min-w-[90px] justify-center bg-card-bg-light border-accent text-accent">
-                <span>{typeof user.robuxBalance === "number" ? user.robuxBalance : "0"}</span>
+              <img
+                src={user.avatarUrl || "/avatar-placeholder.png"}
+                alt="User avatar"
+                className="w-10 h-10 rounded-full object-cover border border-gray-300"
+              />
+              <span className="font-semibold text-base text-[#23272e]">{user.username}</span>
+              <div className="flex items-center gap-1 bg-white px-3 py-1 rounded-2xl border border-gray-200">
+                <span className="font-bold text-lg text-[#10a37f]">{typeof user.robuxBalance === "number" ? user.robuxBalance : "0"}</span>
                 <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
                   <circle cx="12" cy="12" r="10" stroke="#10a37f" strokeWidth="2"/>
                   <rect x="8" y="8" width="8" height="8" rx="2" fill="#10a37f"/>
