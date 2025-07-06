@@ -12,8 +12,8 @@ interface NavLink {
 }
 
 const navLinks: NavLink[] = [
-  { href: "/#faq", label: "Help", match: /#faq/ },
-  { href: "/#blogs", label: "Blog", match: /#blogs/ },
+  { href: "/help", label: "Help", match: /^\/help/ },
+  { href: "/blog", label: "Blog", match: /^\/blog/ },
 ];
 
 const userLinks: NavLink[] = [
