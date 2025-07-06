@@ -111,11 +111,9 @@ export default function Navbar() {
                     type="button"
                     className="w-full text-left px-8 py-4 text-lg text-[#444950] bg-white hover:bg-gray-200 rounded-b-2xl transition font-medium"
                     style={{borderTop: '1px solid #e5e7eb'}}
-                    onClick={() => {
-                      alert('Logout clicked!');
+                    onMouseDown={() => {
                       // Bulletproof logout: clear all storage and cookies
                       setUser(null);
-                      setAvatarMenuOpen(false);
                       try {
                         localStorage.clear();
                         sessionStorage.clear();
@@ -124,6 +122,7 @@ export default function Navbar() {
                         });
                       } catch {/* ignore */}
                       window.location.replace('/');
+                      setAvatarMenuOpen(false);
                     }}
                   >
                     Logout
@@ -140,7 +139,6 @@ export default function Navbar() {
                 type="button"
                 className="ml-2 px-4 py-2 rounded bg-red-500 text-white font-semibold hover:bg-red-600 transition"
                 onClick={() => {
-                  alert('Logout clicked!');
                   setUser(null);
                   setAvatarMenuOpen(false);
                   try {
