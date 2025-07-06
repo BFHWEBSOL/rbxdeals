@@ -3,10 +3,7 @@ import React, { useState } from "react";
 import { useSession } from "../../context/SessionContext";
 import { useRouter } from "next/navigation";
 
-const sidebarLinks = [
-  { label: "Earn Robux", icon: "💰" },
-  { label: "Withdraw", icon: "⬇️" },
-];
+
 
 export default function Earn() {
   const { user, setUser, mounted } = useSession();

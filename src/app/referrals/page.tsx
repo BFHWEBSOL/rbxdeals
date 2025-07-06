@@ -140,7 +140,7 @@ export default function ReferralsPage() {
             </button>
           </div>
           <p className="text-sm text-gray-600 mt-2">
-            Share this link with your friends. You'll earn 10 Robux for each friend who signs up and completes their first task!
+            Share this link with your friends. You&apos;ll earn 10 Robux for each friend who signs up and completes their first task!
           </p>
         </div>
 
