@@ -1,9 +1,10 @@
 "use client";
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
-import { db } from "@/lib/firebase";
-import { doc, getDoc } from "firebase/firestore";
 import { useSession } from "../context/SessionContext";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../lib/firebase";
+import Login from "../components/Login";
+import FAQAccordion from "../components/FAQAccordion";
 
 const CLOUD_FUNCTION_URL = "https://us-central1-speed-camera-50eee.cloudfunctions.net/getRobloxUser";
 
@@ -69,7 +70,6 @@ export default function RobuminerLanding() {
     avatarUrl: string;
   }>(null);
   const { user, setUser } = useSession();
-  const router = useRouter();
   const [showConfirm, setShowConfirm] = useState(false);
 
   return (

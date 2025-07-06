@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useSession } from "../context/SessionContext";
 import Image from "next/image";
 
@@ -28,7 +28,6 @@ export default function Navbar() {
   const { user, setUser } = useSession();
   const [avatarMenuOpen, setAvatarMenuOpen] = useState(false);
   const avatarRef = useRef<HTMLImageElement>(null);
-  const router = useRouter();
 
   // Close menu when clicking outside
   useEffect(() => {

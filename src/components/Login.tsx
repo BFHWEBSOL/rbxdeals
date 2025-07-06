@@ -1,9 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
-import { db } from "../lib/firebase";
-import { doc, getDoc } from "firebase/firestore";
 import { useSession } from "../context/SessionContext";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../lib/firebase";
 
 // Replace with your actual deployed Cloud Function URL
 const CLOUD_FUNCTION_URL = "https://us-central1-speed-camera-50eee.cloudfunctions.net/getRobloxUser";
@@ -13,7 +12,6 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const { setUser } = useSession();
-  const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
