@@ -12,7 +12,6 @@ interface NavLink {
 }
 
 const navLinks: NavLink[] = [
-  { href: "/", label: "Earn Robux", match: /^\/$/ },
   { href: "/#faq", label: "Help", match: /#faq/ },
   { href: "/#blogs", label: "Blog", match: /#blogs/ },
 ];
