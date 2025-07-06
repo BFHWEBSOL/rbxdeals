@@ -101,9 +101,12 @@ export default function Navbar() {
                 onClick={() => setAvatarMenuOpen((open) => !open)}
               />
               {avatarMenuOpen && (
-                <div className="absolute left-1/2 -translate-x-1/2 top-14 z-50 w-64 bg-white border border-gray-100 rounded-2xl shadow-xl py-6 flex flex-col items-start animate-fade-in" style={{boxShadow: '0 4px 24px 0 rgba(16,24,40,0.08)'}}>
+                <div className="absolute left-1/2 -translate-x-1/2 top-14 z-50 w-64 bg-white rounded-2xl shadow-xl flex flex-col items-stretch animate-fade-in" style={{boxShadow: '0 4px 24px 0 rgba(16,24,40,0.08)'}}>
+                  {/* Triangle */}
+                  <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white rotate-45 shadow-sm border-l border-t border-gray-100" style={{zIndex:2}} />
                   <button
-                    className="w-full text-left px-8 py-3 text-lg text-[#444950] hover:bg-gray-100 rounded-xl transition font-medium"
+                    className="w-full text-left px-8 py-4 text-lg text-[#444950] hover:bg-gray-200 rounded-b-2xl transition font-medium"
+                    style={{borderTop: '1px solid #e5e7eb'}}
                     onClick={() => { setUser(null); setAvatarMenuOpen(false); }}
                   >
                     Logout
